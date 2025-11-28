@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('pswd');
             $table->boolean('is_active')->default(true);
             $table->boolean('gender')->default(true);
-            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
+            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
+            $table->softDeletes();
 
         });
     }

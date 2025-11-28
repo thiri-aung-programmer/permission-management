@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->string('name',255);
-            $table->foreignId('feature_id')->constrained('features')->onDelete('cascade');
+            $table->foreignId('feature_id')->constrained('features')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
+          $table->softDeletes();
         });
     }
 
