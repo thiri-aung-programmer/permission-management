@@ -5,13 +5,14 @@
 @endsection
 @section('styles')
 <style>
-table{
-    width:50%;
+    /* table{
+    width:70%;    
     margin:auto;
+    
     border-collapse:collapse;
-}
+} */
 table,th,td{
-    border:1px solid black;
+    /* border:1px solid black; */
 }
 th,td{
     padding:10px;
@@ -85,7 +86,7 @@ h2{
 .addStudentButton{
     padding:10px 20px;
     background-color:#005bb5;
-    font-weigtht:bold;
+    font-weight:bold;
     color:white;
     border:1px solid #005bb5;
     display:inline-block;
@@ -94,8 +95,8 @@ h2{
 .addStudentButton:hover{
     background-color:#004080;
 }
-</style>
-@endsection
+</style> 
+ @endsection 
 @section('content')
 <h2>Roles</h2>
 <form action="{{ URL('role') }}" method="GET">
@@ -105,8 +106,9 @@ h2{
     <a href="{{ URL('role/add') }}" class="addStudentButton ms-3" title="Add Role"><i class="fa-solid fa-plus"></i></a>
 </div>
 </form>
-<table>
-    <thead>
+<div class="m-auto w-50">
+    <table class="table w-100 table-striped border-1">
+    <thead class="bg-primary">
         <tr>
         <th>ID</th>
         <th>Name</th>       
@@ -131,6 +133,7 @@ h2{
         @endforeach
     </tbody>
 </table>
+</div>
 <div class="paginationDiv w-100">
     {{ $roles->
     appends(request()->query())
