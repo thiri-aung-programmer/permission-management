@@ -5,56 +5,8 @@
 @endsection
 @section('styles')
 <style>
-    /* table{
-    width:70%;    
-    margin:auto;
-    
-    border-collapse:collapse;
-} */
-table,th,td{
-    /* border:1px solid black; */
-}
-th,td{
-    padding:10px;
   
-}
-th{
-    background-color:#005bb5;
-    color:white;
-    text-align: center;
-}
-td{
-    text-align: left;
-}
-tr:nth-child(even){
-    background-color:#f2f2f2;
-}
-tr:hover{
-    background-color:#f5f5f5;
-}
-h2{
-    color:#005bb5;
-    text-align:center;
-}
-.search{
-    display:flex;
-    justify-content:center;
-    margin-bottom:20px;    
-}
-.search input{
-    padding:10px;
-    width:50%;
-    margin-right:10px;
-}
-.search button{
-    padding:10px;
-    background-color:#005bb5;
-    color:white;
-    border:none;
-}
-.search button:hover{
-    background-color:#004088;
-}
+   
 
 .editButtton{
     background-color:#4CAF50;
@@ -95,10 +47,34 @@ h2{
 .addStudentButton:hover{
     background-color:#004080;
 }
+.h2title{
+    color:#005bb5;
+    text-align:center;
+    }
+    .search{
+    display:flex;
+    justify-content:center;
+    margin-bottom:20px;    
+}
+.search input{
+    padding:10px;
+    width:50%;
+    margin-right:10px;
+}
+.search button{
+    padding:10px;
+    background-color:#005bb5;
+    color:white;
+    border:none;
+}
+.search button:hover{
+    background-color:#004088;
+}
+
 </style> 
  @endsection 
 @section('content')
-<h2>Roles</h2>
+    <h2 class="h2title">Roles</h2>
 <form action="{{ URL('role') }}" method="GET">
     <div class="search">
     <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
@@ -107,8 +83,8 @@ h2{
 </div>
 </form>
 <div class="m-auto w-50">
-    <table class="table w-100 table-striped border-1">
-    <thead class="bg-primary">
+    <table class="table table-striped table-bordered">
+    <thead class="table-dark text-center">
         <tr>
         <th>ID</th>
         <th>Name</th>       
@@ -118,7 +94,7 @@ h2{
     <tbody>
         @foreach($roles as $role)
             <tr>
-                <td>{{ $role->id }}</td>
+                <td class="text-center">{{ $role->id }}</td>
                 <td>{{$role->name }}</td>
                
                 <td class="text-center">

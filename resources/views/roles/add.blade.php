@@ -3,7 +3,11 @@
 <title>Role Inserting</title>
 
 @endsection
-
+@section('styles')
+.h5background{
+    background: #005bb5;
+}
+@endsection
 
 @section('content')
     @if($errors->any())
@@ -18,7 +22,7 @@
     @endif    
     <section>
         <div class="card shadow-lg">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header h5background text-white">
                 <h5 class="mb-0">Please Role Insert!!!</h5>
             </div>
             <div class="card-body">
