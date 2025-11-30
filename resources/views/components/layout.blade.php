@@ -73,7 +73,7 @@
 <body>
     <nav>
         <ul>
-             <li><a href="#">Admin-users</a></li>
+             <li><a href="{{route('admin-user.index') }}">Admin-users</a></li>
             <li><a href="{{route('role.index') }}">Roles</a></li>
             <li><a href="{{route('feature.index')}}">Features</a></li>
             <li><a href="#">Permissions_Features</a></li>

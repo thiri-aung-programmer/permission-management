@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -29,5 +30,16 @@ Route::prefix('feature')->controller(FeatureController::class)->group(function (
     Route::get('edit/{id}','edit');
     Route::post('update/{id}','update');
     Route::delete('delete/{id}','destroy')->name('feature.delete');
+}
+);
+
+Route::prefix('admin-user')->controller(AdminUserController::class)->group(function () {
+   
+    Route::get('/','index')->name('admin-user.index');
+    Route::view('add','admin-users.add');
+    Route::post('create','create');
+    Route::get('edit/{id}','edit');
+    Route::post('update/{id}','update');
+    Route::delete('delete/{id}','destroy')->name('admin-user.delete');
 }
 );
