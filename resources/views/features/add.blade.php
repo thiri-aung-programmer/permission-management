@@ -1,12 +1,14 @@
 <x-layout>
 <x-header>
-   <title>Role Inserting</title>
+    <title>Feature Inserting</title>
 </x-header>
 <x-slot:style> 
     #h5Div{
          background: #005bb5;
     }
 </x-slot:style>
+
+
     @if($errors->any())
         <div class="alert alert-danger">
             <ul>    
@@ -20,10 +22,10 @@
     <section>
         <div class="card shadow-lg">
             <div class="card-header text-white" id="h5Div">
-                <h5 class="mb-0">Please Role Insert!!!</h5>
+                <h5 class="mb-0">Please Feature Insert!!!</h5>
             </div>
             <div class="card-body">
-                <form action="{{ URL('role/create') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ URL('feature/create') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -37,6 +39,6 @@
             </div>
         </div>
     </section>
-<x-slot:scripts>
+  <x-slot:scripts>
   </x-slot:scripts>
 </x-layout>

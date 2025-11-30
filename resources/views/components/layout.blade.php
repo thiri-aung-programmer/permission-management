@@ -73,10 +73,11 @@
 <body>
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact Us</a></li>
+             <li><a href="#">Admin-users</a></li>
+            <li><a href="{{route('role.index') }}">Roles</a></li>
+            <li><a href="{{route('feature.index')}}">Features</a></li>
+            <li><a href="#">Permissions_Features</a></li>
+            <li><a href="#">Permissions By Roles</a></li>
         </ul>
     </nav>
 

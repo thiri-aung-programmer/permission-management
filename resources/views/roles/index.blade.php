@@ -1,11 +1,8 @@
-@extends('layouts.app')
-@section('head')
-<title>Roles</title>
-
-@endsection
-@section('styles')
-<style>
-  
+<x-layout>
+<x-header>
+    <title>Role Inserting</title>
+</x-header>
+<x-slot:style>    
    
 
 .editButtton{
@@ -70,10 +67,8 @@
 .search button:hover{
     background-color:#004088;
 }
+</x-slot:style>
 
-</style> 
- @endsection 
-@section('content')
     <h2 class="h2title">Roles</h2>
 <form action="{{ URL('role') }}" method="GET">
     <div class="search">
@@ -116,4 +111,7 @@
     ->links('pagination::bootstrap-5') }}
 </div>
 
-@endsection
+
+    <x-slot:scripts>
+    </x-slot:scripts>
+</x-layout>
