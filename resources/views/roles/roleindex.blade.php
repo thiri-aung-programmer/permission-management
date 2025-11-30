@@ -2,8 +2,8 @@
 <x-header>
     <title>Role Inserting</title>
 </x-header>
-<x-style>    
-
+<x-slot:style>    
+{{-- <style> --}}
 .editButtton{
     background-color:#4CAF50;
     color:white;
@@ -66,7 +66,8 @@
 .search button:hover{
     background-color:#004088;
 }
-</x-style>
+{{-- </style> --}}
+</x-slot:style>
 
       <h2 class="h2title">Roles</h2>
 <form action="{{ URL('role') }}" method="GET">
