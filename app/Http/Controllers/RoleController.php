@@ -19,19 +19,7 @@ class RoleController extends Controller
     
     return view("roles.index",compact("roles"));
    }
-    public function index1(Request $request){
-    // $students = Student::all();
-    $roles = Role::when($request->search, function ($query) use ($request) {
-    return $query->whereAny(
-        ['name'],
-        'like',
-        '%' . $request->search . '%'
-    );
-    })->paginate(5);
     
-    return view("roles.roleindex",compact("roles"));
-   }
-
     public function create(RoleAddRequest $request){
 
    
