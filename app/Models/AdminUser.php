@@ -11,7 +11,7 @@ class AdminUser extends Model
     use SoftDeletes;
 
     public function role(){
-        return  $this->belongsTo(Role::class,"role_id")
-                     ->with("name");
+        return  $this->belongsTo(Role::class,'role_id', 'id');
+                    //   ->with("role:name");
     }
 }

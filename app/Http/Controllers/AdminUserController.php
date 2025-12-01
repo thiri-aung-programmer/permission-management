@@ -11,15 +11,21 @@ class AdminUserController extends Controller
     
     public function index(Request $request){
     // $students = Student::all();
-    $adminusers = AdminUser::when($request->search, function ($query) use ($request) {
-    return $query->whereAny(
-        ['name'],
-        'like',
-        '%' . $request->search . '%'
-    );
+    $adminusers=AdminUser::with("role")->get();
+    dd($adminusers);
+    $adminusers =AdminUser::with(['role:id,name'])
+    ->when($request->search, function ($query) use ($request) {
+        $search = '%' . $request->search . '%';
+
+        return $query->where(function ($q) use ($search) {
+            $q->where('name', 'like', $search)
+              ->orWhereHas('role', function ($r) use ($search) {
+                  $r->where('name', 'like', $search);
+              });
+        });
     })->paginate(5);
-    
-    return view("admin-user.index",compact("adminusers"));
+    // dd($adminusers);
+    return view("admin-users.index",compact("adminusers"));
    }
 
     public function create(AdminUserAddRequest $request){

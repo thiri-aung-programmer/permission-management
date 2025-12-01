@@ -1,6 +1,6 @@
 <x-layout>
 <x-header>
-    <title>Feature</title>
+    <title>Admin Users</title>
 </x-header>
 <x-slot:style>    
 {{-- <style> --}}
@@ -69,12 +69,12 @@
 {{-- </style> --}}
 </x-slot:style>
 
-     <h2 class="h2title">Features</h2>
-    <form action="{{ URL('feature') }}" method="GET">
+     <h2 class="h2title">Admin-users</h2>
+    <form action="{{ URL('admin-user') }}" method="GET">
         <div class="search">
             <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
             <Button type="submit">Search</Button>
-            <a href="{{ URL('feature/add') }}" class="addStudentButton ms-3" title="Add Featue"><i class="fa-solid fa-plus"></i></a>
+            <a href="{{ URL('admin-user/add') }}" class="addStudentButton ms-3" title="Add Admin-user"><i class="fa-solid fa-plus"></i></a>
         </div>
     </form>
     <div class="m-auto w-50">
@@ -82,19 +82,31 @@
             <thead class="table-dark text-center">
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>       
+                    <th>Name</th> 
+                    <th>User Name</th>         
+                    <th>Email</th>   
+                    <th>Phone</th>
+                    <th>Address</th>  
+                    <th>Gender</th>  
+                    <th>Role</th>        
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                 @foreach($features as $feature)
+                 @foreach($adminusers as $adminuser)
                 <tr>
-                    <td class="text-center">{{ $feature->id }}</td>
-                    <td>{{$feature->name }}</td>
+                    <td class="text-center">{{ $adminuser->id }}</td>
+                    <td>{{$adminuser->name }}</td>
+                    <td>{{$adminuser->username }}</td>
+                    <td>{{$adminuser->email }}</td>
+                    <td>{{$adminuser->phone }}</td>
+                    <td>{{$adminuser->address }}</td>
+                    <td>{{$adminuser->gender }}</td>
+                    <td>{{$adminuser->role->name ?? 'No Role' }}</td>
                
                     <td class="text-center">
-                        <a href="{{ URL('feature/edit',$feature->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
-                            <form action="{{ route('feature.delete', $feature->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this feature?')" style="display:inline">
+                        <a href="{{ URL('adminuser/edit',$adminuser->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                            <form action="{{ route('admin-user.delete', $adminuser->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this user?')" style="display:inline">
                                  @csrf                      
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
@@ -106,7 +118,7 @@
         </table>
     </div>
     <div class="paginationDiv w-100">
-         {{ $features->
+         {{ $adminusers->
             appends(request()->query())
             ->links('pagination::bootstrap-5') }}
     </div>
