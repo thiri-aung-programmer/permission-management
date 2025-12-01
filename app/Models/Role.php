@@ -10,6 +10,10 @@ class Role extends Model
 {
     //
     use SoftDeletes;
+    protected $fillable = [
+        'name',     
+        
+    ];
     public function users(){
         return $this->hasMany(AdminUser::class,"role_id");
     }

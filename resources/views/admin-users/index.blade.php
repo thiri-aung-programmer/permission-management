@@ -70,14 +70,14 @@
 </x-slot:style>
 
      <h2 class="h2title">Admin-users</h2>
-    <form action="{{ URL('admin-user') }}" method="GET">
+    <form action="{{ route('admin-user') }}" method="GET">
         <div class="search">
             <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
             <Button type="submit">Search</Button>
-            <a href="{{ URL('admin-user/add') }}" class="addStudentButton ms-3" title="Add Admin-user"><i class="fa-solid fa-plus"></i></a>
+            <a href="{{ route('admin-user.add') }}" class="addStudentButton ms-3" title="Add Admin-user"><i class="fa-solid fa-plus"></i></a>
         </div>
     </form>
-    <div class="m-auto w-50">
+    <div class="m-auto w-75">
         <table class="table table-striped table-bordered">
             <thead class="table-dark text-center">
                 <tr>
@@ -105,7 +105,7 @@
                     <td>{{$adminuser->role->name ?? 'No Role' }}</td>
                
                     <td class="text-center">
-                        <a href="{{ URL('adminuser/edit',$adminuser->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{ route('admin-user.edit',$adminuser->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
                             <form action="{{ route('admin-user.delete', $adminuser->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this user?')" style="display:inline">
                                  @csrf                      
                                 @method('DELETE')

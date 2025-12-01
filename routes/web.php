@@ -35,11 +35,11 @@ Route::prefix('feature')->controller(FeatureController::class)->group(function (
 
 Route::prefix('admin-user')->controller(AdminUserController::class)->group(function () {
    
-    Route::get('/','index')->name('admin-user.index');
-    Route::view('add','admin-users.add');
-    Route::post('create','create');
-    Route::get('edit/{id}','edit');
-    Route::post('update/{id}','update');
+    Route::get('/','index')->name('admin-user');
+    Route::get('add','add')->name("admin-user.add");
+    Route::post('create','create')->name("admin-user.create");
+    Route::get('edit/{id}','edit')->name("admin-user.edit");
+    Route::post('update/{id}','update')->name("admin-user.update");
     Route::delete('delete/{id}','destroy')->name('admin-user.delete');
 }
 );
