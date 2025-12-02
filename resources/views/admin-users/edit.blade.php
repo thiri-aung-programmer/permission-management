@@ -88,7 +88,7 @@
                             <select class="form-select" name="role_id" id="role_id" aria-label="Role">
                                 @foreach ($roles as $role)
                                      <option value="{{$role->id}}"
-                                         {{ old('role_id')==$adminuser->role->id?'selected':'' }}>
+                                         {{ $role->id==$adminuser->role->id?'selected':'' }}>
                                          {{$role->name}}</option>
                                 @endforeach
                            

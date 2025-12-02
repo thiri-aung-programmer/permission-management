@@ -32,7 +32,7 @@
 }
 
 .addStudentButton{
-    padding:10px 20px;
+    padding:20px;
     background-color:#005bb5;
     font-weight:bold;
     color:white;
@@ -58,7 +58,7 @@
     margin-right:10px;
 }
 .search button{
-    padding:10px;
+    padding:10px 20px;
     background-color:#005bb5;
     color:white;
     border:none;
@@ -73,7 +73,7 @@
     <form action="{{ URL('feature') }}" method="GET">
         <div class="search">
             <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
-            <Button type="submit">Search</Button>
+            <Button type="submit" class="btn">Search</Button>
             <a href="{{ URL('feature/add') }}" class="addStudentButton ms-3" title="Add Featue"><i class="fa-solid fa-plus"></i></a>
         </div>
     </form>

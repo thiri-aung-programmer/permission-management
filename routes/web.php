@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -43,3 +44,4 @@ Route::prefix('admin-user')->controller(AdminUserController::class)->group(funct
     Route::delete('delete/{id}','destroy')->name('admin-user.delete');
 }
 );
+Route::resource('permission',PermissionController::class);
