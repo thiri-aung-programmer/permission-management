@@ -20,6 +20,9 @@ Route::prefix('role')->controller(RoleController::class)->group(function () {
     Route::get('edit/{id}','edit')->name('role.edit');
     Route::post('update/{id}','update')->name('role.update');
     Route::delete('delete/{id}','destroy')->name('role.delete');
+    Route::get('/permissions/{id}','showpermissions')->name('role.permissions');
+    Route::post('updatePermission/{id}','updatePermissions')->name('role.updatePermission');
+   
 }
 );
 

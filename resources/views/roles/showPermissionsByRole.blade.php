@@ -68,7 +68,7 @@
     background-color:#004088;
 }
 </x-slot:style>
-
+    {{ dd($permissionsbyrole) }}
     <h2 class="h2title">Roles</h2>
 <form action="{{ URL('role') }}" method="GET">
     <div class="search">
