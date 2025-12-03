@@ -68,8 +68,9 @@
     background-color:#004088;
 }
 </x-slot:style>
-    {{ dd($permissionsbyrole) }}
-    <h2 class="h2title">Roles</h2>
+{{-- {{ print_r($permissionbyrole) }} --}}
+    {{-- {{ dd($permissionbyrole ) }} --}}
+    <h2 class="h2title">Permission By Roles</h2>
 <form action="{{ URL('role') }}" method="GET">
     <div class="search">
     <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
@@ -82,24 +83,30 @@
     <thead class="table-dark text-center">
         <tr>
         <th>ID</th>
-        <th>Name</th>       
+        <th>Role Name</th>       
+        <th>Permission Name</th>
+        <th>Feature Name</th>
         <th>Action</th>
     </tr>
     </thead>
     <tbody>
-        @foreach($roles as $role)
+
+       
+             @foreach ($permissionbyrole as $item)
             <tr>
-                <td class="text-center">{{ $role->id }}</td>
-                <td>{{$role->name }}</td>
-               
+                <td>{{ $item['id'] }}</td>
+                <td>{{ $item['role']['name'] }}</td>
+                <td>{{ $item['permission']['name'] }}</td>
+                <td>{{ $item['permission']['feature']['name'] }}</td>
+            
                 <td class="text-center">
-                    <a href="{{ URL('role/edit',$role->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
-                    <form action="{{ route('role.delete', $role->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this role?')" style="display:inline">
+                    {{-- <a href="{{ URL('role/edit',$item['id']) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                    <form action="{{ route('role.delete', $item['id']) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this role?')" style="display:inline">
                         @csrf                      
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
-                    </form>
-                     <a href="{{ route('role.permissions',$role->id) }}" class="btn btn-primary"><i class="fa-solid fa-key"></i></a>
+                    </form> --}}
+                     {{-- <a href="{{ route('role.permissions',$item['id']) }}" class="btn btn-primary"><i class="fa-solid fa-key"></i></a> --}}
                 </td>
             </tr>
         @endforeach
@@ -107,9 +114,9 @@
 </table>
 </div>
 <div class="paginationDiv w-100">
-    {{ $roles->
+    {{-- {{ $permissionbyrole->
     appends(request()->query())
-    ->links('pagination::bootstrap-5') }}
+    ->links('pagination::bootstrap-5') }} --}}
 </div>
 
 

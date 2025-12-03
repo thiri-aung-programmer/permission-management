@@ -22,6 +22,7 @@ Route::prefix('role')->controller(RoleController::class)->group(function () {
     Route::delete('delete/{id}','destroy')->name('role.delete');
     Route::get('/permissions/{id}','showpermissions')->name('role.permissions');
     Route::post('updatePermission/{id}','updatePermissions')->name('role.updatePermission');
+    Route::get('viewPermissionRole','viewPermissionRole')->name('role.viewPermissionRole');
    
 }
 );

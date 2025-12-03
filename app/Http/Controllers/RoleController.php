@@ -75,4 +75,9 @@ public function updatePermissions(Request $request, $roleId)
     $permissionsbyrole=PermissionRole::get();
     return view('roles.showPermissionsByRole',compact('role','permissionsbyrole'));
 }
+public function viewPermissionRole(){
+    $roles=Role::get();
+    $permissionbyrole =PermissionRole::with(['role', 'permission.feature'])->get()->toArray();
+    return view('roles.showPermissionsByRole',compact('roles','permissionbyrole'));
+}
 }

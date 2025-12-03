@@ -73,11 +73,11 @@
 <body>
     <nav>
         <ul>
-             <li><a href="{{route('admin-user') }}">Admin-users</a></li>
-            <li><a href="{{route('role.index') }}">Roles</a></li>
-            <li><a href="{{route('feature.index')}}">Features</a></li>
-            <li><a href="{{ route('permission.index') }}">Permissions_Features</a></li>
-            <li><a href="#">Permissions By Roles</a></li>
+             <li class="{{ request()->routeIs('admin-user') ? 'active' : '' }}"><a href="{{route('admin-user') }}">Admin-users</a></li>
+            <li class="{{ request()->routeIs('role.index') ? 'active' : '' }}"><a href="{{route('role.index') }}">Roles</a></li>
+            <li class="{{ request()->routeIs('feature.index') ? 'active' : '' }}"><a href="{{route('feature.index')}}">Features</a></li>
+            <li  class="{{ request()->routeIs('permission.index') ? 'active' : '' }}"><a href="{{ route('permission.index') }}">Permissions_Features</a></li>
+            <li class="{{ request()->routeIs('role.viewPermissionRole') ? 'active' : '' }}"><a href="{{route('role.viewPermissionRole')}}">Permissions By Roles</a></li>
         </ul>
     </nav>
 
