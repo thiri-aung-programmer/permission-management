@@ -59,21 +59,22 @@ public function updatePermissions(Request $request, $roleId)
 {
     $role = Role::findOrFail($roleId);
 
+    // $newPermissions = $request->input('permissions', []);
+    // $existing = $role->permissions->pluck('id')->toArray();
+
+    // // filter out permissions that already exist (to prevent duplicates)
+    // $toAdd = array_diff($newPermissions, $existing);
+
+    // // attach only new ones
+    // if (!empty($toAdd)) {
+    //     $role->permissions()->attach($toAdd);
+    // }
     $newPermissions = $request->input('permissions', []);
-    $existing = $role->permissions->pluck('id')->toArray();
 
-    // filter out permissions that already exist (to prevent duplicates)
-    $toAdd = array_diff($newPermissions, $existing);
-
-    // attach only new ones
-    if (!empty($toAdd)) {
-        $role->permissions()->attach($toAdd);
-    }
-    dd( $existing,"<br>", $newPermissions,"<br>", $toAdd);
-   
-    $role=Role::get();
-    $permissionsbyrole=PermissionRole::get();
-    return view('roles.showPermissionsByRole',compact('role','permissionsbyrole'));
+     // sync will attach new ones and detach removed ones automatically
+      $role->permissions()->sync($newPermissions);
+    
+         return redirect('role');
 }
 public function viewPermissionRole(){
     $roles=Role::get();
