@@ -7,14 +7,14 @@ use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 // Route::get('/', function () {
 //     return view('index',[RoleController::class,'index']);
 // });
 Route::prefix('role')->controller(RoleController::class)->group(function () {
   
-    Route::get('/','index')->name('role.index');
+    Route::get('/','index')->name('role.view');
     Route::view('add','roles.add')->name('role.add');
     Route::post('create','create')->name('role.create');
     Route::get('edit/{id}','edit')->name('role.edit');
@@ -29,7 +29,7 @@ Route::prefix('role')->controller(RoleController::class)->group(function () {
 
 Route::prefix('feature')->controller(FeatureController::class)->group(function () {
    
-    Route::get('/','index')->name('feature.index');
+    Route::get('/','index')->name('feature.view');
     Route::view('add','features.add');
     Route::post('create','create');
     Route::get('edit/{id}','edit');
@@ -40,7 +40,7 @@ Route::prefix('feature')->controller(FeatureController::class)->group(function (
 
 Route::prefix('admin-user')->controller(AdminUserController::class)->group(function () {
    
-    Route::get('/','index')->name('admin-user');
+    Route::get('/','index')->name('admin-user.view');
     Route::get('add','add')->name("admin-user.add");
     Route::post('create','create')->name("admin-user.create");
     Route::get('edit/{id}','edit')->name("admin-user.edit");
