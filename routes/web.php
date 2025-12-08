@@ -4,9 +4,10 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::middleware(['guest'])->get('/', function () {
     return view('index');
 });
 // Route::get('/', function () {
@@ -49,3 +50,6 @@ Route::prefix('admin-user')->controller(AdminUserController::class)->group(funct
 }
 );
 Route::resource('permission',PermissionController::class);
+ 
+// Route::post('/login',route('admin-user.view'));
+Route::post('/login', [LoginController::class, 'login'])->name('login');

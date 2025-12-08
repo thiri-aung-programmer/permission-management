@@ -78,7 +78,25 @@
             <li class="{{ request()->routeIs('feature.view') ? 'active' : '' }}"><a href="{{route('feature.view')}}">Features</a></li>
             <li  class="{{ request()->routeIs('permission.view') ? 'active' : '' }}"><a href="{{ route('permission.index') }}">Permissions_Features</a></li>
             <li class="{{ request()->routeIs('role.viewPermissionRole') ? 'active' : '' }}"><a href="{{route('role.viewPermissionRole')}}">Permissions By Roles</a></li>
+            <li>
+                    {{-- login logout  --}}
+
+                    <div class="navbar-end gap-2">
+                        @auth
+                            <span class="text-sm">{{ auth()->user()->name }}</span>
+                            <form method="POST" action="/logout" class="inline">
+                                @csrf
+                                <button type="submit" class="btn btn-ghost btn-sm">Logout</button>
+                            </form>
+                        @else
+                            <a href="/login" class="btn btn-ghost btn-sm bg-white">Sign In</a>
+                            {{-- <a href="{{ route('register') }}" class="btn btn-primary btn-sm">Sign Up</a> --}}
+                        @endauth
+                    </div>
+                    {{-- login logout  --}}
+            </li>
         </ul>
+       
     </nav>
 
     <div class="main-container">
