@@ -11,8 +11,14 @@
                     <input type="submit" value="Login" class="btn btn-danger">
                 </div>
             </form>
-                        <?php if(isset($error)){
-                            echo $error;
-                        }
-                        ?>
+                        
+                    @if ($errors->any())
+                    <div class="alert alert-danger items-center w-50 m-auto">
+                        <ul class="list-unstyled w-75 m-auto fw-bold">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
 </x-welcome>
