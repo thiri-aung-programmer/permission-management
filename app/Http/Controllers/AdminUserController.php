@@ -38,7 +38,7 @@ class AdminUserController extends Controller
         'phone'=> $request['phone'],
         'email' => $request['email'],
         'address'=> $request['address'],
-        'pswd' => bcrypt($request['pswd']),
+        'password' => bcrypt($request['pswd']),
         'is_active'=> $request['is_active'],
         'gender'=> $request['gender']
     ]);
@@ -60,7 +60,7 @@ public function update(Request $request, $id){
       $adminuser->name = $request->name;
        $adminuser->username=$request->username;
        $adminuser->email = $request->email;
-       $adminuser->pswd = bcrypt($request->pswd);
+       $adminuser->password = bcrypt($request->pswd);
        $adminuser->role_id = $request->role_id;
        $adminuser->phone= $request->phone;
         $adminuser->address= $request->address;

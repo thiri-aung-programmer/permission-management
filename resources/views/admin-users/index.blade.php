@@ -70,7 +70,7 @@
 </x-slot:style>
 
      <h2 class="h2title">Admin-users</h2>
-    <form action="{{ route('admin-user') }}" method="GET">
+    <form action="{{ route('admin-user.view') }}" method="GET">
         <div class="search">
             <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
             <Button type="submit" class="btn">Search</Button>

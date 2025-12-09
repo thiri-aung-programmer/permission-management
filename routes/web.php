@@ -7,12 +7,33 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['guest'])->get('/', function () {
-    return view('index');
-});
-// Route::get('/', function () {
-//     return view('index',[RoleController::class,'index']);
+// Route::get("/", function () {
+//     return redirect("/login");
 // });
+// Route::middleware('custom_guest')->get('/login', [LoginController::class ,'index']);
+// // Route::get('/', function () {
+// //     return view('index',[RoleController::class,'index']);
+// // });
+
+// Redirect root to login
+Route::get("/", function () {
+    return redirect("/login");
+});
+
+// Guest-only (not logged in)
+Route::middleware('custom_guest')->group(function () {
+    Route::get('/login',[LoginController::class,'index'])->name('home');
+});
+
+// Auth-only routes
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view("login");
+    })->name('dashboard');
+});
+
+// Route::post('/login',route('admin-user.view'));
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::prefix('role')->controller(RoleController::class)->group(function () {
   
     Route::get('/','index')->name('role.view');
@@ -51,5 +72,4 @@ Route::prefix('admin-user')->controller(AdminUserController::class)->group(funct
 );
 Route::resource('permission',PermissionController::class);
  
-// Route::post('/login',route('admin-user.view'));
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+

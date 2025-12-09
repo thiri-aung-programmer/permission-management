@@ -8,14 +8,23 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    
+    public function index(){
+        return view("index");
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+        //  $credentials['password'] = bcrypt($credentials['password']);
+        //  dd($credentials);
+        //  $2y$12$jxSDFON4vtHs3lowLHtFl.zne/XciXKqIKDjob.Z34T2UW7wxIXta
 
+        //  dd(bcrypt($credentials['password']));
+       
+        // dd(Auth::attempt($credentials, $request->remember));
         // Check login
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
