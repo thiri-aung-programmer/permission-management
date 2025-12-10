@@ -39,7 +39,7 @@ Route::post('/logout', Logout::class)
     // Route::get('/dashboard', function () {
     //     return view("login");
     // })->name('dashboard');
-
+    Route::get("/dashboard",[HomeController::class,"dashboard"])->name("dashboard");
 
 // Route::post('/login',route('admin-user.view'));
 // Route::post('/login', [Login::class, 'login'])->name('login');

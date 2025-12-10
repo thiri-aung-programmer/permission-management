@@ -1,8 +1,13 @@
 <x-layout>
-    @if (session('error'))
+<x-header>
+    <title>Dashboard</title>
+</x-header>
+<x-slot:style>   
+</x-slot:style>
+    @if (session('loggedIn'))
     <div class="alert alert-danger">
-        {{ session('error') }}
-        <h3 class="text-center">You are already Login !!!!</h3>
+       
+        <h3 class="text-center"> {{ session('loggedIn') }}</h3>
     </div>
 @endif
 </x-layout>
