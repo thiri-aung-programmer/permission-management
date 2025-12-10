@@ -4,36 +4,45 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\Login;
+use App\Http\Controllers\Auth\Logout;
 use Illuminate\Support\Facades\Route;
 
-// Route::get("/", function () {
-//     return redirect("/login");
-// });
-// Route::middleware('custom_guest')->get('/login', [LoginController::class ,'index']);
-// // Route::get('/', function () {
-// //     return view('index',[RoleController::class,'index']);
-// // });
 
-// Redirect root to login
-Route::get("/", function () {
-    return redirect("/login");
-});
+// Login routes
+Route::get("/", [HomeController::class,'index'])->name('home');
+Route::view('/login', 'auth.login')
 
-// Guest-only (not logged in)
-Route::middleware('custom_guest')->group(function () {
-    Route::get('/login',[LoginController::class,'index'])->name('home');
-});
+    ->middleware('guest')
 
-// Auth-only routes
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view("login");
-    })->name('dashboard');
-});
+    ->name('login');
+
+ 
+
+Route::post('/login', Login::class)
+
+    ->middleware('guest');
+
+ 
+
+// Logout route
+
+// Route::get('/logout', [Logout::class, 'logout']);
+Route::post('/logout', Logout::class)
+
+    ->middleware('auth')
+
+    ->name('logout');
+
+
+    // Route::get('/dashboard', function () {
+    //     return view("login");
+    // })->name('dashboard');
+
 
 // Route::post('/login',route('admin-user.view'));
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+// Route::post('/login', [Login::class, 'login'])->name('login');
 Route::prefix('role')->controller(RoleController::class)->group(function () {
   
     Route::get('/','index')->name('role.view');

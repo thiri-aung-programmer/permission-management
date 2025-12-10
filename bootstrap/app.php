@@ -12,9 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         //
-         $middleware->alias([
-        'custom_guest' => \App\Http\Middleware\CustomGuest::class,
-        ]);
+        
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

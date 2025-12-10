@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class Login extends Controller
 {
-    public function index(){
-        return view("index");
-    }
+    // public function index(){
+    //     return view("index");
+    // }
 
-    public function login(Request $request)
+    public function __invoke(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
