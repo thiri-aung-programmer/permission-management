@@ -9,22 +9,22 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Role;
-class AdminUser  extends Authenticatable
+class AdminUser extends Authenticatable
 {
     //
     use SoftDeletes;
 
     protected $fillable = [
         'name',
-        'username',       
+        'username',
         'phone',
-         'email',
-         'address',         
+        'email',
+        'address',
         'password',
         'is_active',
         'gender',
         'role_id'
-        
+
     ];
 
     /**
@@ -37,9 +37,10 @@ class AdminUser  extends Authenticatable
         'remember_token',
     ];
 
-    public function role(){
-        return  $this->belongsTo(Role::class,'role_id', 'id');
-                    //   ->with("role:name");
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id', 'id');
+        //   ->with("role:name");
     }
     protected function casts(): array
     {
@@ -48,4 +49,9 @@ class AdminUser  extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function isAdmin()
+    {
+        return $this->role->name === 'Admin';
+    }
+
 }

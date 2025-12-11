@@ -70,6 +70,8 @@
 </x-slot:style>
 
      <h2 class="h2title">Admin-users</h2>
+     {{-- {{ dd(Auth::user()->role->name) }} --}}
+
     <form action="{{ route('admin-user.view') }}" method="GET">
         <div class="search">
             <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">

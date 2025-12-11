@@ -74,11 +74,20 @@
     <nav class="w-100 text-center m-auto align-content-center py-0">
         <ul class="d-flex justify-content-center align-items-center" style="height: 100%;">
              <li class="{{ request()->routeIs('admin-user.view') ? 'active' : '' }}"><a href="{{route('admin-user.view') }}">Admin-users</a></li>
-            <li class="{{ request()->routeIs('role.view') ? 'active' : '' }}"><a href="{{route('role.view') }}">Roles</a></li>
-            <li class="{{ request()->routeIs('feature.view') ? 'active' : '' }}"><a href="{{route('feature.view')}}">Features</a></li>
-            <li  class="{{ request()->routeIs('permission.view') ? 'active' : '' }}"><a href="{{ route('permission.index') }}">Permissions_Features</a></li>
-            <li class="{{ request()->routeIs('role.viewPermissionRole') ? 'active' : '' }}"><a href="{{route('role.viewPermissionRole')}}">Permissions By Roles</a></li>
-            <li>
+            @if (Auth::user()->isAdmin())
+                <li class="{{ request()->routeIs('role.view') ? 'active' : '' }}"><a href="{{route('role.view') }}">Roles</a></li>
+            @endif
+
+            @if (Auth::user()->isAdmin())
+                 <li class="{{ request()->routeIs('feature.view') ? 'active' : '' }}"><a href="{{route('feature.view')}}">Features</a></li>
+            @endif
+
+            @if (Auth::user()->isAdmin())
+                 <li  class="{{ request()->routeIs('permission.view') ? 'active' : '' }}"><a href="{{ route('permission.index') }}">Permissions_Features</a></li>
+            @endif                  
+           
+                <li class="{{ request()->routeIs('role.viewPermissionRole') ? 'active' : '' }}"><a href="{{route('role.viewPermissionRole')}}">Permissions By Roles</a></li>
+                <li>
                     {{-- login logout  --}}
 
                     <div class="navbar-end gap-2 bg-primary-subtle text-center rounded-2 fw-bolder d-flex m-auto justify-content-center align-items-center p-2" style="height: 100%;">
@@ -94,7 +103,7 @@
                         @endauth
                     </div>
                     {{-- login logout  --}}
-            </li>
+                </li>
         </ul>
        
     </nav>

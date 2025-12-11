@@ -75,4 +75,5 @@ public function destroy($id)
     $adminuser->delete();
     return redirect('admin-user');
 }
+
 }
