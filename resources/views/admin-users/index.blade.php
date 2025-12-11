@@ -76,7 +76,10 @@
         <div class="search">
             <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
             <Button type="submit" class="btn">Search</Button>
-            <a href="{{ route('admin-user.add') }}" class="addStudentButton ms-3" title="Add Admin-user"><i class="fa-solid fa-plus"></i></a>
+             @if (Auth::user()->isAdmin())
+                <a href="{{ route('admin-user.add') }}" class="addStudentButton ms-3" title="Add Admin-user"><i class="fa-solid fa-plus"></i></a>
+             @endif
+            
         </div>
     </form>
     <div class="m-auto w-75">
@@ -107,12 +110,16 @@
                     <td>{{$adminuser->role->name ?? 'No Role' }}</td>
                
                     <td class="text-center">
-                        <a href="{{ route('admin-user.edit',$adminuser->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                        @if (Auth::user()->isAdmin()||Auth::user()->id===$adminuser->id)
+                            <a href="{{ route('admin-user.edit',$adminuser->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                        @endif
+                        @if (Auth::user()->isAdmin())
                             <form action="{{ route('admin-user.delete', $adminuser->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this user?')" style="display:inline">
                                  @csrf                      
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
                             </form>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
