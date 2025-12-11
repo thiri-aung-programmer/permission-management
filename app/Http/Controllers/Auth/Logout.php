@@ -14,9 +14,7 @@ class Logout extends Controller
     public function __invoke(Request $request)
     {
         
-         Auth::logout();
-
- 
+         Auth::logout(); 
 
         // Invalidate session
 

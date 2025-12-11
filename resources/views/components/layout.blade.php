@@ -92,8 +92,8 @@
 
                     <div class="navbar-end gap-2 bg-primary-subtle text-center rounded-2 fw-bolder d-flex m-auto justify-content-center align-items-center p-2" style="height: 100%;">
                         @auth
-                            <span class="text-sm d-inline-block w-50"><i class="bi bi-person-circle p-2"></i>{{ auth()->user()->name }}</span>
-                            <form method="POST" action="/logout" class="d-inline-block w-100">
+                            <span class="text-sm d-inline-block"><i class="bi bi-person-circle p-2"></i>{{ auth()->user()->name }}</span>
+                            <form method="POST" action="/logout" class="d-inline-block">
                                 @csrf
                                 <button type="submit" class="btn btn-ghost btn-sm fw-bold"><span class="py-1 px-1 rounded-circle text-center bg-white me-1"><i class="fa-solid fa-right-from-bracket"></i></span>Logout</button>
                             </form>

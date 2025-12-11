@@ -9,9 +9,9 @@ class HomeController extends Controller
 {
     
     public function index(){
-        if(Auth::check()){
-            return  redirect(route("dashboard"))->with("loggedIn","You Have Already Logged In!");
-        }
+        // if(Auth::check()){
+        //     return  redirect(route("dashboard"))->with("loggedIn","You Have Already Logged In!");
+        // }
 
         return view("index");
     }

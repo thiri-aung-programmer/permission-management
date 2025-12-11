@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Login routes
-Route::get("/", [HomeController::class,'index'])->name('home');
+Route::get("/", [HomeController::class,'index'])->middleware('guest')->name('home');
 Route::view('/login', 'auth.login')
 
     ->middleware('guest')
@@ -43,7 +43,7 @@ Route::post('/logout', Logout::class)
 
 // Route::post('/login',route('admin-user.view'));
 // Route::post('/login', [Login::class, 'login'])->name('login');
-Route::prefix('role')->controller(RoleController::class)->group(function () {
+Route::prefix('role')->controller(RoleController::class)->middleware('auth')->group(function () {
   
     Route::get('/','index')->name('role.view');
     Route::view('add','roles.add')->name('role.add');
@@ -58,7 +58,7 @@ Route::prefix('role')->controller(RoleController::class)->group(function () {
 }
 );
 
-Route::prefix('feature')->controller(FeatureController::class)->group(function () {
+Route::prefix('feature')->controller(FeatureController::class)->middleware('auth')->group(function () {
    
     Route::get('/','index')->name('feature.view');
     Route::view('add','features.add');
@@ -69,7 +69,7 @@ Route::prefix('feature')->controller(FeatureController::class)->group(function (
 }
 );
 
-Route::prefix('admin-user')->controller(AdminUserController::class)->group(function () {
+Route::prefix('admin-user')->controller(AdminUserController::class)->middleware('auth')->group(function () {
    
     Route::get('/','index')->name('admin-user.view');
     Route::get('add','add')->name("admin-user.add");
@@ -79,6 +79,6 @@ Route::prefix('admin-user')->controller(AdminUserController::class)->group(funct
     Route::delete('delete/{id}','destroy')->name('admin-user.delete');
 }
 );
-Route::resource('permission',PermissionController::class);
+Route::resource('permission',PermissionController::class)->middleware('auth');
  
 
