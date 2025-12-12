@@ -110,9 +110,12 @@
                     <td>{{$adminuser->role->name ?? 'No Role' }}</td>
                
                     <td class="text-center">
-                        @if (Auth::user()->isAdmin()||Auth::user()->id===$adminuser->id)
+                       
+                        @can('smae-or-admin', $adminuser->id)
+                        {{-- @if (Auth::user()->isAdmin()||Auth::user()->id===$adminuser->id) --}}
                             <a href="{{ route('admin-user.edit',$adminuser->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
-                        @endif
+                        {{-- @endif --}}
+                        @endcan
                         @can('is-admin')
                             <form action="{{ route('admin-user.delete', $adminuser->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this user?')" style="display:inline">
                                  @csrf                      

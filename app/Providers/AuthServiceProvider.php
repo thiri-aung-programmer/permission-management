@@ -18,5 +18,15 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('is-admin', function ($user) {
             return strtolower($user->role->name) === 'admin';
         });
+        //ဝင်လာတဲ့ ကောင်နဲ့ တူလားစစ်
+        Gate::define('is-same-user', function ($user, $targetUserId) {
+            return $user->id === $targetUserId;
+        });
+        //admin or ဝင်လာတဲ့ သူနဲ့ id တူမတူ 
+         Gate::define('smae-or-admin', function ($user, $targetUserId) {
+            return (strtolower($user->role->name) === 'admin')||($user->id === $targetUserId);
+        });
+
+
     }
 }

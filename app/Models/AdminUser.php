@@ -49,9 +49,9 @@ class AdminUser extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function isAdmin()
-    {
-        return strtolower($this->role->name) == 'admin';
-    }
+    // public function isAdmin()
+    // {
+    //     return strtolower($this->role->name) == 'admin';
+    // }
 
 }
