@@ -74,17 +74,17 @@
     <nav class="w-100 text-center m-auto align-content-center py-0">
         <ul class="d-flex justify-content-center align-items-center" style="height: 100%;">
              <li class="{{ request()->routeIs('admin-user.view') ? 'active' : '' }}"><a href="{{route('admin-user.view') }}">Admin-users</a></li>
-            @if (Auth::user()->isAdmin())
+            @can('is-admin')
                 <li class="{{ request()->routeIs('role.view') ? 'active' : '' }}"><a href="{{route('role.view') }}">Roles</a></li>
-            @endif
+            @endcan
 
-            @if (Auth::user()->isAdmin())
+            @can('is-admin')
                  <li class="{{ request()->routeIs('feature.view') ? 'active' : '' }}"><a href="{{route('feature.view')}}">Features</a></li>
-            @endif
+            @endcan
 
-            @if (Auth::user()->isAdmin())
+            @can('is-admin')
                  <li  class="{{ request()->routeIs('permission.view') ? 'active' : '' }}"><a href="{{ route('permission.index') }}">Permissions_Features</a></li>
-            @endif                  
+            @endcan                  
            
                 <li class="{{ request()->routeIs('role.viewPermissionRole') ? 'active' : '' }}"><a href="{{route('role.viewPermissionRole')}}">Permissions By Roles</a></li>
                 <li>
