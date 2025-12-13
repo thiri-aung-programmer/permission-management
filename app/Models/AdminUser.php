@@ -53,6 +53,16 @@ class AdminUser extends Authenticatable
     // {
     //     return strtolower($this->role->name) == 'admin';
     // }
+    public function hasPermissionOld(string $featureName, string $actionName): bool
+    {
+    return $this->role
+        ->permissions()
+        ->where('name', $featureName)
+        ->whereHas('feature', function ($q) use ($actionName) {
+            $q->where('name', $actionName);
+        })
+        ->exists();
+    }
     public function hasPermission(string $featureName, string $actionName): bool
     {
     return $this->role

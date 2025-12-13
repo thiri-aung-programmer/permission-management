@@ -105,7 +105,7 @@
                         <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
                     </form>
                      @endcan
-                      @can('viewPermission', Auth::user())
+                      @can('createPermission', Auth::user())
                      <a href="{{ route('role.permissions',$role->id) }}" class="btn btn-primary"><i class="fa-solid fa-key"></i></a>
                      @endcan
                 </td>

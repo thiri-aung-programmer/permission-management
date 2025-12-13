@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\AdminUser;
  use App\Models\Role;
+ use App\Models\Permission;
 use Illuminate\Auth\Access\Response;
 
 class RolePolicy
@@ -53,6 +54,18 @@ class RolePolicy
         // 👤 Owner based (edit own profile)
         return false;
     }
+    
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function deleteRole(AdminUser $adminUser): bool
+    {
+        if ($adminUser->hasPermission('role', 'delete')) {
+            return true;
+        }
+        return false;
+    }
+
     public function updatePermission(AdminUser $authUser, AdminUser $targetUser): bool
     {
         // 🔐 Permission based (edit-user)
@@ -77,17 +90,6 @@ class RolePolicy
         return false;
     }
 
-
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function deleteRole(AdminUser $adminUser): bool
-    {
-        if ($adminUser->hasPermission('role', 'delete')) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * Determine whether the user can restore the model.

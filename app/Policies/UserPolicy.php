@@ -82,17 +82,8 @@ class UserPolicy
     {
         return false;
     }
-     public function updatePermission(AdminUser $authUser, AdminUser $targetUser): bool
-    {
-        // 🔐 Permission based (edit-user)
-        //  dd($targetUser->id);
-        if ($authUser->hasPermission('permission', 'edit')) {
-            return true;
-        }
-       
-        // 👤 Owner based (edit own profile)
-        return false;
-    }
+    //permission အတွက်
+     
     public function viewPermission(AdminUser $authUser, AdminUser $targetUser): bool
     {
         // 🔐 Permission based (edit-user)
@@ -105,5 +96,149 @@ class UserPolicy
         // 👤 Owner based (edit own profile)
         return false;
     }
+     public function createPermission(AdminUser $adminUser): bool
+    {
+         if ($adminUser->hasPermission('permission', 'add')) {
+            return true;
+        }
+        return false;
+    }
+    public function updatePermission(AdminUser $authUser, AdminUser $targetUser): bool
+    {
+        // 🔐 Permission based (edit-user)
+        //  dd($targetUser->id);
+        if ($authUser->hasPermission('permission', 'edit')) {
+            return true;
+        }
+       
+        // 👤 Owner based (edit own profile)
+        return false;
+    }
+     public function deletePermission(AdminUser $adminUser): bool
+    {
+        if ($adminUser->hasPermission('permission', 'delete')) {
+            return true;
+        }
+        return false;
+    }
+    // role အတွက်
+     public function viewRole(AdminUser $model): bool
+    {
+        if ($model->hasPermission('role', 'view')) {
+            return true;
+        }
+        return false;
+    }
 
+    public function createRole(AdminUser $adminUser): bool
+    {
+         if ($adminUser->hasPermission('role', 'add')) {
+            return true;
+        }
+        return false;
+    }
+
+    public function updateRole(AdminUser $authUser, AdminUser $targetUser): bool
+    {
+        // 🔐 Permission based (edit-user)
+        //  dd($targetUser->id);
+        if ($authUser->hasPermission('role', 'edit')) {
+            return true;
+        }
+       
+        // 👤 Owner based (edit own profile)
+        return false;
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function deleteRole(AdminUser $adminUser): bool
+    {
+        if ($adminUser->hasPermission('role', 'delete')) {
+            return true;
+        }
+        return false;
+    }
+
+     // feature အတွက်
+     public function viewFeature(AdminUser $model): bool
+    {
+        if ($model->hasPermission('feature', 'view')) {
+            return true;
+        }
+        return false;
+    }
+
+    public function createFeature(AdminUser $adminUser): bool
+    {
+         if ($adminUser->hasPermission('feature', 'add')) {
+            return true;
+        }
+        return false;
+    }
+
+    public function updateFeature(AdminUser $authUser, AdminUser $targetUser): bool
+    {
+        // 🔐 Permission based (edit-user)
+        //  dd($targetUser->id);
+        if ($authUser->hasPermission('feature', 'edit')) {
+            return true;
+        }
+       
+        // 👤 Owner based (edit own profile)
+        return false;
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function deleteFeature(AdminUser $adminUser): bool
+    {
+        if ($adminUser->hasPermission('feature', 'delete')) {
+            return true;
+        }
+        return false;
+    }
+
+
+    // Stock အတွက်
+     public function viewStock(AdminUser $model): bool
+    {
+        if ($model->hasPermission('stock', 'view')) {
+            return true;
+        }
+        return false;
+    }
+
+    public function createStock(AdminUser $adminUser): bool
+    {
+         if ($adminUser->hasPermission('stock', 'add')) {
+            return true;
+        }
+        return false;
+    }
+
+    public function updateStock(AdminUser $authUser, AdminUser $targetUser): bool
+    {
+        // 🔐 Permission based (edit-user)
+        //  dd($targetUser->id);
+        if ($authUser->hasPermission('stock', 'edit')) {
+            return true;
+        }
+       
+        // 👤 Owner based (edit own profile)
+        return false;
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function deleteStock(AdminUser $adminUser): bool
+    {
+        if ($adminUser->hasPermission('stock', 'delete')) {
+            return true;
+        }
+        return false;
+    }
 }

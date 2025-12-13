@@ -80,11 +80,12 @@
                 <li class="{{ request()->routeIs('role.view') ? 'active' : '' }}"><a href="{{route('role.view') }}">Roles</a></li>
             @endcan
 
-            @can('is-admin')
+            @can('viewFeature', Auth::user())
                  <li class="{{ request()->routeIs('feature.view') ? 'active' : '' }}"><a href="{{route('feature.view')}}">Features</a></li>
             @endcan
 
-            @can('is-admin')
+            {{-- @can('is-admin') --}}
+            @can('viewPermission', Auth::user())
                  <li  class="{{ request()->routeIs('permission.view') ? 'active' : '' }}"><a href="{{ route('permission.index') }}">Permissions_Features</a></li>
             @endcan                  
             @can('viewPermission', Auth::user())
