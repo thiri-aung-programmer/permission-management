@@ -74,7 +74,7 @@
     <div class="search">
     <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
     <Button type="submit" class="btn">Search</Button>
-    @can('create', Auth::user())
+    @can('createRole', Auth::user())
     <a href="{{ URL('role/add') }}" class="addStudentButton ms-3" title="Add Role"><i class="fa-solid fa-plus"></i></a>
     @endcan
 </div>
@@ -95,10 +95,10 @@
                 <td>{{$role->name }}</td>
                
                 <td class="text-center">
-                     @can('update', Auth::user())
+                     @can('updateRole', Auth::user())
                     <a href="{{ URL('role/edit',$role->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
                     @endcan
-                     @can('delete', Auth::user())
+                     @can('deleteRole', Auth::user())
                     <form action="{{ route('role.delete', $role->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this role?')" style="display:inline">
                         @csrf                      
                         @method('DELETE')

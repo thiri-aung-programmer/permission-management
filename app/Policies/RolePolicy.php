@@ -11,15 +11,15 @@ class RolePolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(Role $Role): bool
-    {
-        return false;
-    }
+    // public function viewAny(Role $Role): bool
+    // {
+    //     return false;
+    // }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(AdminUser $model): bool
+    public function viewRole(AdminUser $model): bool
     {
         if ($model->hasPermission('role', 'view')) {
             return true;
@@ -30,7 +30,7 @@ class RolePolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(AdminUser $adminUser): bool
+    public function createRole(AdminUser $adminUser): bool
     {
          if ($adminUser->hasPermission('role', 'add')) {
             return true;
@@ -42,7 +42,7 @@ class RolePolicy
      * Determine whether the user can update the model.
      */
     
-    public function update(AdminUser $authUser, AdminUser $targetUser): bool
+    public function updateRole(AdminUser $authUser, AdminUser $targetUser): bool
     {
         // 🔐 Permission based (edit-user)
         //  dd($targetUser->id);
@@ -81,7 +81,7 @@ class RolePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(AdminUser $adminUser): bool
+    public function deleteRole(AdminUser $adminUser): bool
     {
         if ($adminUser->hasPermission('role', 'delete')) {
             return true;

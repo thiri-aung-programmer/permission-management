@@ -75,8 +75,8 @@
         <ul class="d-flex justify-content-center align-items-center" style="height: 100%;">
 
              <li class="{{ request()->routeIs('admin-user.view') ? 'active' : '' }}"><a href="{{route('admin-user.view') }}">Admin-users</a></li>
-            @can('is-admin')
-            {{-- @can('view', Auth::user()) --}}
+            {{-- @can('is-admin') --}}
+            @can('viewRole', Auth::user())
                 <li class="{{ request()->routeIs('role.view') ? 'active' : '' }}"><a href="{{route('role.view') }}">Roles</a></li>
             @endcan
 
@@ -87,8 +87,9 @@
             @can('is-admin')
                  <li  class="{{ request()->routeIs('permission.view') ? 'active' : '' }}"><a href="{{ route('permission.index') }}">Permissions_Features</a></li>
             @endcan                  
-           
+            @can('viewPermission', Auth::user())
                 <li class="{{ request()->routeIs('role.viewPermissionRole') ? 'active' : '' }}"><a href="{{route('role.viewPermissionRole')}}">Permissions By Roles</a></li>
+            @endcan
                 <li>
                     {{-- login logout  --}}
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PermissionAddRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Permission;
 use App\Models\Feature;
@@ -14,6 +15,7 @@ class PermissionController extends Controller
      */
     public function index(Request $request)
     {
+         $this->authorize('viewPermission', Auth::user());
          $permissions =Permission::with('feature')
     ->when($request->search, function ($query) use ($request) {
         $search = '%' . $request->search . '%';
@@ -34,6 +36,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        $this->authorize('createPremission', Auth::user());
         $features = Feature::all();
         return view('permissions.add',compact('features'));
     }
@@ -43,7 +46,7 @@ class PermissionController extends Controller
      */
     public function store(PermissionAddRequest $request)
     {
-        
+          $this->authorize('createPremission', Auth::user());
         Permission::create([
         'name' => $request['name'],
         'feature_id'=> $request['feature_id']
