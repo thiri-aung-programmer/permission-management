@@ -31,6 +31,10 @@ class PermissionSeeder extends Seeder
             ['name' => 'delete','feature_id'=>4],
             ['name' => 'edit','feature_id'=>4],
             ['name' => 'add','feature_id'=>4],
+             ['name' => 'view' ,'feature_id'=>5],
+            ['name' => 'delete','feature_id'=>5],
+            ['name' => 'edit','feature_id'=>5],
+            ['name' => 'add','feature_id'=>5],
             ];
 
             foreach ($permissions as $permission) {
