@@ -30,7 +30,7 @@
                         <input type="text" disabled class="form-control" id="name" name="name" value="{{ $role->name }}">
                     </div>
 
-                    <div>Assigned Permission : {{ print_r($assigned) }}</div>
+                    {{-- <div>Assigned Permission : {{ print_r($assigned) }}</div> --}}
                     <div class="mb-3 w-75 m-auto p-4 bg-primary-subtle">
                         <h3 class="text-success text-center fw-bolder">Permissions & Feature</h3>
                         <div class="row justify-content-center">

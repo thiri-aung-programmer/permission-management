@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdminUserAddRequest;
 use App\Models\AdminUser;
 use App\Models\Role;
+use app\Policies\AdminUserPolicy;
+
+use App\Http\Requests\AdminUserUpdateRequest;
 
 use Illuminate\Http\Request;
 
@@ -52,11 +55,15 @@ public function add(){
 public function edit($id)
 {
     $adminuser=AdminUser::findOrFail($id);
+
     $roles = Role::all();
+    $this->authorize('update', $adminuser);
+
     return view('admin-users.edit',compact('adminuser','roles'));
 }
 public function update(Request $request, $id){
      $adminuser=AdminUser::findOrFail($id);
+     $this->authorize('update', $adminuser);
       $adminuser->name = $request->name;
        $adminuser->username=$request->username;
        $adminuser->email = $request->email;

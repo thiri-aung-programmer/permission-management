@@ -111,7 +111,9 @@
                
                     <td class="text-center">
                        
-                        @can('smae-or-admin', $adminuser->id)
+                        {{-- @can('smae-or-admin', $adminuser->id) --}}
+                        @can('update', $adminuser)
+                      
                         {{-- @if (Auth::user()->isAdmin()||Auth::user()->id===$adminuser->id) --}}
                             <a href="{{ route('admin-user.edit',$adminuser->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
                         {{-- @endif --}}
