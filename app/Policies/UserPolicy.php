@@ -32,6 +32,9 @@ class UserPolicy
      */
     public function create(AdminUser $adminUser): bool
     {
+         if ($adminUser->hasPermission('user', 'add')) {
+            return true;
+        }
         return false;
     }
 
@@ -55,8 +58,11 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(AdminUser $adminUser, User $model): bool
+    public function delete(AdminUser $adminUser): bool
     {
+        if ($adminUser->hasPermission('user', 'delete')) {
+            return true;
+        }
         return false;
     }
 

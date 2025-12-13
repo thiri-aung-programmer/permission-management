@@ -76,7 +76,8 @@
         <div class="search">
             <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
             <Button type="submit" class="btn">Search</Button>
-             @can('is-admin')
+             {{-- @can('is-admin') --}}
+              @can('create', Auth::user())
                 <a href="{{ route('admin-user.add') }}" class="addStudentButton ms-3" title="Add Admin-user"><i class="fa-solid fa-plus"></i></a>
              @endcan
             
@@ -118,7 +119,8 @@
                             <a href="{{ route('admin-user.edit',$adminuser->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
                         {{-- @endif --}}
                         @endcan
-                        @can('is-admin')
+                        {{-- @can('is-admin') --}}
+                         @can('delete', Auth::user())
                             <form action="{{ route('admin-user.delete', $adminuser->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this user?')" style="display:inline">
                                  @csrf                      
                                 @method('DELETE')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdminUserAddRequest;
 use App\Models\AdminUser;
 use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use app\Policies\AdminUserPolicy;
 
 use App\Http\Requests\AdminUserUpdateRequest;
@@ -33,7 +34,7 @@ class AdminUserController extends Controller
    }
 
     public function create(AdminUserAddRequest $request){
-
+         $this->authorize('create', Auth::user());
    AdminUser::create([
         'name' => $request['name'],
         'username'=>$request['username'],
