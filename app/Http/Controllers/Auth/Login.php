@@ -28,6 +28,7 @@ class Login extends Controller
         // Check login
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
+             $this->authorize('view',Auth::user());
             return redirect()->intended(route('admin-user.view'));
         }
 

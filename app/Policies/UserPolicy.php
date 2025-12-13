@@ -19,8 +19,11 @@ class UserPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(AdminUser $adminUser, User $model): bool
+    public function view(AdminUser $model): bool
     {
+        if ($model->hasPermission('user', 'view')) {
+            return true;
+        }
         return false;
     }
 

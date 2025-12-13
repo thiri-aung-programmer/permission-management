@@ -12,6 +12,7 @@ class HomeController extends Controller
         // if(Auth::check()){
         //     return  redirect(route("dashboard"))->with("loggedIn","You Have Already Logged In!");
         // }
+        
 
         return view("index");
     }
