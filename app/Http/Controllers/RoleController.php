@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\PermissionRole;
 use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 use App\Http\Requests\RoleAddRequest;
@@ -10,6 +11,7 @@ use App\Http\Requests\RoleAddRequest;
 class RoleController extends Controller
 {
      public function index(Request $request){
+         $this->authorize('view', Auth::user());
     // $students = Student::all();
     $roles = Role::when($request->search, function ($query) use ($request) {
     return $query->whereAny(
@@ -24,7 +26,7 @@ class RoleController extends Controller
     
     public function create(RoleAddRequest $request){
 
-   
+    $this->authorize('add', Auth::user());
     $role=new Role();
     $role->name = $request->name;
     
@@ -35,21 +37,25 @@ class RoleController extends Controller
 public function edit($id)
 {
     $role=Role::findOrFail($id);
+     $this->authorize('update', Auth::user());
     return view('roles.edit',compact('role'));
 }
 public function update(Request $request, $id){
      $role=Role::findOrFail($id);
+      $this->authorize('update', Auth::user());
       $role->name = $request->name;
        $role->update();
     return redirect('role');
 }
 public function destroy($id)
 {
+     $this->authorize('delete', Auth::user());
     $role=Role::findOrFail($id);
     $role->delete();
     return redirect('role');
 }
 public function showpermissions($id){
+    $this->authorize('viewPermission', Auth::user());
     $role=Role::findOrFail($id);
     $permissions = Permission::all();
      $assigned = $role->permissions->pluck('id')->toArray();
@@ -58,6 +64,7 @@ public function showpermissions($id){
 public function updatePermissions(Request $request, $roleId)
 {
     $role = Role::findOrFail($roleId);
+     $this->authorize('editPermission', Auth::user());
 
     // $newPermissions = $request->input('permissions', []);
     // $existing = $role->permissions->pluck('id')->toArray();

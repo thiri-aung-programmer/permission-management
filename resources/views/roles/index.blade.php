@@ -74,7 +74,9 @@
     <div class="search">
     <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
     <Button type="submit" class="btn">Search</Button>
+    @can('create', Auth::user())
     <a href="{{ URL('role/add') }}" class="addStudentButton ms-3" title="Add Role"><i class="fa-solid fa-plus"></i></a>
+    @endcan
 </div>
 </form>
 <div class="m-auto w-50">
@@ -93,13 +95,19 @@
                 <td>{{$role->name }}</td>
                
                 <td class="text-center">
+                     @can('update', Auth::user())
                     <a href="{{ URL('role/edit',$role->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                    @endcan
+                     @can('delete', Auth::user())
                     <form action="{{ route('role.delete', $role->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this role?')" style="display:inline">
                         @csrf                      
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
                     </form>
+                     @endcan
+                      @can('viewPermission', Auth::user())
                      <a href="{{ route('role.permissions',$role->id) }}" class="btn btn-primary"><i class="fa-solid fa-key"></i></a>
+                     @endcan
                 </td>
             </tr>
         @endforeach

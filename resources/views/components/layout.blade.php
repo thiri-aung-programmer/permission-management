@@ -73,8 +73,10 @@
 <body>
     <nav class="w-100 text-center m-auto align-content-center py-0">
         <ul class="d-flex justify-content-center align-items-center" style="height: 100%;">
+
              <li class="{{ request()->routeIs('admin-user.view') ? 'active' : '' }}"><a href="{{route('admin-user.view') }}">Admin-users</a></li>
             @can('is-admin')
+            {{-- @can('view', Auth::user()) --}}
                 <li class="{{ request()->routeIs('role.view') ? 'active' : '' }}"><a href="{{route('role.view') }}">Roles</a></li>
             @endcan
 

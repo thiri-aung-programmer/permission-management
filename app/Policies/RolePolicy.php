@@ -3,15 +3,15 @@
 namespace App\Policies;
 
 use App\Models\AdminUser;
-use App\Models\User;
+ use App\Models\Role;
 use Illuminate\Auth\Access\Response;
 
-class UserPolicy
+class RolePolicy
 {
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(AdminUser $adminUser): bool
+    public function viewAny(Role $Role): bool
     {
         return false;
     }
@@ -21,7 +21,7 @@ class UserPolicy
      */
     public function view(AdminUser $model): bool
     {
-        if ($model->hasPermission('user', 'view')) {
+        if ($model->hasPermission('role', 'view')) {
             return true;
         }
         return false;
@@ -32,7 +32,7 @@ class UserPolicy
      */
     public function create(AdminUser $adminUser): bool
     {
-         if ($adminUser->hasPermission('user', 'add')) {
+         if ($adminUser->hasPermission('role', 'add')) {
             return true;
         }
         return false;
@@ -46,42 +46,14 @@ class UserPolicy
     {
         // 🔐 Permission based (edit-user)
         //  dd($targetUser->id);
-        if ($authUser->hasPermission('user', 'edit')) {
+        if ($authUser->hasPermission('role', 'edit')) {
             return true;
         }
        
         // 👤 Owner based (edit own profile)
-        return $authUser->id === $targetUser->id;
-    }
-
-
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(AdminUser $adminUser): bool
-    {
-        if ($adminUser->hasPermission('user', 'delete')) {
-            return true;
-        }
         return false;
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(AdminUser $adminUser, User $model): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(AdminUser $adminUser, User $model): bool
-    {
-        return false;
-    }
-     public function updatePermission(AdminUser $authUser, AdminUser $targetUser): bool
+    public function updatePermission(AdminUser $authUser, AdminUser $targetUser): bool
     {
         // 🔐 Permission based (edit-user)
         //  dd($targetUser->id);
@@ -105,4 +77,31 @@ class UserPolicy
         return false;
     }
 
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(AdminUser $adminUser): bool
+    {
+        if ($adminUser->hasPermission('role', 'delete')) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore(AdminUser $adminUser, Role $model): bool
+    {
+        return false;
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(AdminUser $adminUser, Role $model): bool
+    {
+        return false;
+    }
 }

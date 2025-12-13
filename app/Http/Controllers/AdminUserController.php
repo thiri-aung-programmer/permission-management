@@ -35,7 +35,7 @@ class AdminUserController extends Controller
 
     public function create(AdminUserAddRequest $request){
          $this->authorize('create', Auth::user());
-   AdminUser::create([
+         AdminUser::create([
         'name' => $request['name'],
         'username'=>$request['username'],
         'role_id'=> $request['role_id'],
@@ -49,7 +49,9 @@ class AdminUserController extends Controller
     return redirect('admin-user');
 }
 public function add(){
+    $this->authorize('create', Auth::user());
     $roles = Role::all();
+
     return view('admin-users.add',compact('roles'));
 }
 
@@ -79,6 +81,7 @@ public function update(Request $request, $id){
 }
 public function destroy($id)
 {
+     $this->authorize('delete', Auth::user());
     $adminuser=AdminUser::findOrFail($id);
     $adminuser->delete();
     return redirect('admin-user');
