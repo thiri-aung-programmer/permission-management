@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Policies;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\AdminUser;
 use App\Models\User;
@@ -22,7 +23,7 @@ class UserPolicy
      */
     public function view(AdminUser $model): bool
     {
-        if ($model->hasPermission('user', 'view')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||($model->hasPermission('user', 'view'))) {
             return true;
         }
         return false;
@@ -33,7 +34,7 @@ class UserPolicy
      */
     public function create(AdminUser $adminUser): bool
     {
-         if ($adminUser->hasPermission('user', 'add')) {
+         if ((strtolower(Auth::user()->role->name)==="admin")||$adminUser->hasPermission('user', 'add')) {
             return true;
         }
         return false;
@@ -47,7 +48,7 @@ class UserPolicy
     {
         // 🔐 Permission based (edit-user)
         //  dd($targetUser->id);
-        if ($authUser->hasPermission('user', 'edit')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$authUser->hasPermission('user', 'edit')) {
             return true;
         }
        
@@ -61,7 +62,7 @@ class UserPolicy
      */
     public function delete(AdminUser $adminUser): bool
     {
-        if ($adminUser->hasPermission('user', 'delete')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$adminUser->hasPermission('user', 'delete')) {
             return true;
         }
         return false;
@@ -89,7 +90,7 @@ class UserPolicy
         // 🔐 Permission based (edit-user)
         //  dd($targetUser->id);
         // dd($authUser->hasPermission('permission', 'view'));
-        if ($authUser->hasPermission('permission', 'view')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$authUser->hasPermission('permission', 'view')) {
             return true;
         }
        
@@ -98,7 +99,7 @@ class UserPolicy
     }
      public function createPermission(AdminUser $adminUser): bool
     {
-         if ($adminUser->hasPermission('permission', 'add')) {
+         if ((strtolower(Auth::user()->role->name)==="admin")||$adminUser->hasPermission('permission', 'add')) {
             return true;
         }
         return false;
@@ -107,7 +108,7 @@ class UserPolicy
     {
         // 🔐 Permission based (edit-user)
         //  dd($targetUser->id);
-        if ($authUser->hasPermission('permission', 'edit')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$authUser->hasPermission('permission', 'edit')) {
             return true;
         }
        
@@ -116,7 +117,7 @@ class UserPolicy
     }
      public function deletePermission(AdminUser $adminUser): bool
     {
-        if ($adminUser->hasPermission('permission', 'delete')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$adminUser->hasPermission('permission', 'delete')) {
             return true;
         }
         return false;
@@ -124,7 +125,7 @@ class UserPolicy
     // role အတွက်
      public function viewRole(AdminUser $model): bool
     {
-        if ($model->hasPermission('role', 'view')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$model->hasPermission('role', 'view')) {
             return true;
         }
         return false;
@@ -132,7 +133,7 @@ class UserPolicy
 
     public function createRole(AdminUser $adminUser): bool
     {
-         if ($adminUser->hasPermission('role', 'add')) {
+         if ((strtolower(Auth::user()->role->name)==="admin")||$adminUser->hasPermission('role', 'add')) {
             return true;
         }
         return false;
@@ -142,7 +143,7 @@ class UserPolicy
     {
         // 🔐 Permission based (edit-user)
         //  dd($targetUser->id);
-        if ($authUser->hasPermission('role', 'edit')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$authUser->hasPermission('role', 'edit')) {
             return true;
         }
        
@@ -155,7 +156,7 @@ class UserPolicy
      */
     public function deleteRole(AdminUser $adminUser): bool
     {
-        if ($adminUser->hasPermission('role', 'delete')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$adminUser->hasPermission('role', 'delete')) {
             return true;
         }
         return false;
@@ -164,7 +165,7 @@ class UserPolicy
      // feature အတွက်
      public function viewFeature(AdminUser $model): bool
     {
-        if ($model->hasPermission('feature', 'view')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$model->hasPermission('feature', 'view')) {
             return true;
         }
         return false;
@@ -172,7 +173,7 @@ class UserPolicy
 
     public function createFeature(AdminUser $adminUser): bool
     {
-         if ($adminUser->hasPermission('feature', 'add')) {
+         if ((strtolower(Auth::user()->role->name)==="admin")||$adminUser->hasPermission('feature', 'add')) {
             return true;
         }
         return false;
@@ -182,7 +183,7 @@ class UserPolicy
     {
         // 🔐 Permission based (edit-user)
         //  dd($targetUser->id);
-        if ($authUser->hasPermission('feature', 'edit')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$authUser->hasPermission('feature', 'edit')) {
             return true;
         }
        
@@ -195,7 +196,7 @@ class UserPolicy
      */
     public function deleteFeature(AdminUser $adminUser): bool
     {
-        if ($adminUser->hasPermission('feature', 'delete')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$adminUser->hasPermission('feature', 'delete')) {
             return true;
         }
         return false;
@@ -205,7 +206,7 @@ class UserPolicy
     // Stock အတွက်
      public function viewStock(AdminUser $model): bool
     {
-        if ($model->hasPermission('stock', 'view')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$model->hasPermission('stock', 'view')) {
             return true;
         }
         return false;
@@ -213,7 +214,7 @@ class UserPolicy
 
     public function createStock(AdminUser $adminUser): bool
     {
-         if ($adminUser->hasPermission('stock', 'add')) {
+         if ((strtolower(Auth::user()->role->name)==="admin")||$adminUser->hasPermission('stock', 'add')) {
             return true;
         }
         return false;
@@ -223,7 +224,7 @@ class UserPolicy
     {
         // 🔐 Permission based (edit-user)
         //  dd($targetUser->id);
-        if ($authUser->hasPermission('stock', 'edit')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$authUser->hasPermission('stock', 'edit')) {
             return true;
         }
        
@@ -236,7 +237,7 @@ class UserPolicy
      */
     public function deleteStock(AdminUser $adminUser): bool
     {
-        if ($adminUser->hasPermission('stock', 'delete')) {
+        if ((strtolower(Auth::user()->role->name)==="admin")||$adminUser->hasPermission('stock', 'delete')) {
             return true;
         }
         return false;
