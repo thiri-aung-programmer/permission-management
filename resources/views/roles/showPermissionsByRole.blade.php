@@ -75,7 +75,9 @@
     <div class="search">
     <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
     <Button type="submit" class="btn">Search</Button>
+    @can('createPermission', Auth::user())
     <a href="{{ URL('role/add') }}" class="addStudentButton ms-3" title="Add Role"><i class="fa-solid fa-plus"></i></a>
+    @endcan
 </div>
 </form>
 <div class="m-auto w-50">

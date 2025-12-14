@@ -74,7 +74,9 @@
         <div class="search">
             <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
             <Button type="submit" class="btn">Search</Button>
+            @can('createPermission', Auth::user())
             <a href="{{ route('permission.create') }}" class="addStudentButton ms-3" title="Add Permission"><i class="fa-solid fa-plus"></i></a>
+            @endcan
         </div>
     </form>
     <div class="m-auto w-75">
@@ -95,12 +97,16 @@
                     <td>{{$permission->feature->name ?? 'No Feature' }}</td>
                
                     <td class="text-center">
+                        @can('updatePermission', Auth::user())
                         <a href="{{ route('permission.edit',$permission->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                        @endcan
+                        @can('deletePermission', Auth::user())
                             <form action="{{ route('permission.destroy', $permission->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this permission?')" style="display:inline">
                                  @csrf                      
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
                             </form>
+                        @endcan
                     </td>
                 </tr>
                 @endforeach
