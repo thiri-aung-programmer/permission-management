@@ -52,23 +52,23 @@ class FeatureController extends Controller
     }
 }
 
-public function edit($id)
+public function edit(Feature $feature)
 {
 
-    $feature=Feature::findOrFail($id);
+    $feature=Feature::findOrFail($feature->id);
     $this->authorize('updateFeature', Auth::user());
     return view('features.edit',compact('feature'));
 }
-public function update(Request $request, $id){
-     $feature=Feature::findOrFail($id);
+public function update(Request $request,Feature $feature){
+     $feature=Feature::findOrFail($feature->id);
       $this->authorize('updateFeature', Auth::user());
       $feature->name = $request->name;
        $feature->update();
     return redirect('feature');
 }
-public function destroy($id)
+public function destroy(Feature $feature)
 {
-    $feature=Feature::findOrFail($id);
+    $feature=Feature::findOrFail($feature->id);
       $this->authorize('deleteFeature', Auth::user());
     $feature->delete();
     return redirect('feature');

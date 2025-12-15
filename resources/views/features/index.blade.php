@@ -101,10 +101,10 @@
                
                     <td class="text-center">
                         @can('updateFeature', Auth::user())
-                        <a href="{{ URL('feature/edit',$feature->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{ route('feature.edit',$feature) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
                         @endcan
                         @can('deleteFeature', Auth::user())
-                            <form action="{{ route('feature.delete', $feature->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this feature?')" style="display:inline">
+                            <form action="{{ route('feature.delete', $feature) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this feature?')" style="display:inline">
                                  @csrf                      
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>

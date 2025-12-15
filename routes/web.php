@@ -63,9 +63,9 @@ Route::prefix('feature')->controller(FeatureController::class)->middleware('auth
     Route::get('/','index')->name('feature.view');
     Route::view('add','features.add');
     Route::post('create','create');
-    Route::get('edit/{id}','edit');
-    Route::post('update/{id}','update');
-    Route::delete('delete/{id}','destroy')->name('feature.delete');
+    Route::get('{feature}/edit','edit')->name('feature.edit');
+    Route::post('{feature}/update','update')->name('feature.update');
+    Route::delete('{feature}/delete','destroy')->name('feature.delete');
 }
 );
 
