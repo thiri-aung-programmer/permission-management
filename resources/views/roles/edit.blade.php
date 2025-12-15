@@ -13,7 +13,7 @@
                 <h5 class="mb-0">Role Edit</h5>
             </div>
             <div class="card-body">
-                <form action="{{ URL('role/update',$role->id) }}" method="POST">
+                <form action="{{ route('role.update',$role) }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>

@@ -51,36 +51,36 @@ class RoleController extends Controller
       }
 }
 
-public function edit($id)
+public function edit(Role $role)
 {
-    $role=Role::findOrFail($id);
+    $role=Role::findOrFail($role->id);
      $this->authorize('updateRole', Auth::user());
     return view('roles.edit',compact('role'));
 }
-public function update(Request $request, $id){
-     $role=Role::findOrFail($id);
+public function update(Request $request, Role $role){
+     $role=Role::findOrFail($role->id);
       $this->authorize('updateRole', Auth::user());
       $role->name = $request->name;
        $role->update();
     return redirect('role');
 }
-public function destroy($id)
+public function destroy(Role $role)
 {
      $this->authorize('deleteRole', Auth::user());
-    $role=Role::findOrFail($id);
+    $role=Role::findOrFail($role->id);
     $role->delete();
     return redirect('role');
 }
-public function showpermissions($id){
+public function showpermissions(Role $role){
     $this->authorize('viewPermission', Auth::user());
-    $role=Role::findOrFail($id);
+    $role=Role::findOrFail($role->id);
     $permissions = Permission::all();
      $assigned = $role->permissions->pluck('id')->toArray();
     return view('roles.rolepermissions',compact('role','permissions','assigned'));
 }
-public function updatePermissions(Request $request, $roleId)
+public function updatePermissions(Request $request, Role $role)
 {
-    $role = Role::findOrFail($roleId);
+    $data = Role::findOrFail($role->id);
      $this->authorize('updatePermission', Auth::user());
 
     // $newPermissions = $request->input('permissions', []);
@@ -96,7 +96,7 @@ public function updatePermissions(Request $request, $roleId)
     $newPermissions = $request->input('permissions', []);
 
      // sync will attach new ones and detach removed ones automatically
-      $role->permissions()->sync($newPermissions);
+      $data->permissions()->sync($newPermissions);
     
          return redirect('role');
 }

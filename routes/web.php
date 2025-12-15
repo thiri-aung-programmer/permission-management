@@ -48,11 +48,11 @@ Route::prefix('role')->controller(RoleController::class)->middleware('auth')->gr
     Route::get('/','index')->name('role.view');
     Route::view('add','roles.add')->name('role.add');
     Route::post('create','create')->name('role.create');
-    Route::get('edit/{id}','edit')->name('role.edit');
-    Route::post('update/{id}','update')->name('role.update');
-    Route::delete('delete/{id}','destroy')->name('role.delete');
-    Route::get('/permissions/{id}','showpermissions')->name('role.permissions');
-    Route::post('updatePermission/{id}','updatePermissions')->name('role.updatePermission');
+    Route::get('{role}/edit','edit')->name('role.edit');
+    Route::post('{role}/update','update')->name('role.update');
+    Route::delete('{role}/delete','destroy')->name('role.delete');
+    Route::get('{role}/permissions','showpermissions')->name('role.permissions');
+    Route::post('{role}/updatePermission','updatePermissions')->name('role.updatePermission');
     Route::get('viewPermissionRole','viewPermissionRole')->name('role.viewPermissionRole');
    
 }

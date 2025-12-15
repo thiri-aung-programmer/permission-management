@@ -101,17 +101,17 @@
                
                 <td class="text-center">
                      @can('updateRole', Auth::user())
-                    <a href="{{ URL('role/edit',$role->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                    <a href="{{ route('role.edit',$role) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
                     @endcan
                     @can('deleteRole', Auth::user())
-                    <form action="{{ route('role.delete', $role->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this role?')" style="display:inline">
+                    <form action="{{ route('role.delete', $role) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this role?')" style="display:inline">
                         @csrf                      
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
                     </form>
                     @endcan
                     @can('createPermission', Auth::user())
-                     <a href="{{ route('role.permissions',$role->id) }}" class="btn btn-primary"><i class="fa-solid fa-key"></i></a>
+                     <a href="{{ route('role.permissions',$role) }}" class="btn btn-primary"><i class="fa-solid fa-key"></i></a>
                     @endcan
                 </td>
             </tr>

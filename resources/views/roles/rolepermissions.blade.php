@@ -23,7 +23,7 @@
                 <h5 class="mb-0">Please  Choose Permission Role Insert!!!</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('role.updatePermission',$role->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('role.updatePermission',$role) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Role Name</label>
