@@ -84,18 +84,18 @@ class AdminUserController extends Controller
         return view('admin-users.add', compact('roles'));
     }
 
-    public function edit($id)
+    public function edit(AdminUser $adminuser)
     {
-        $adminuser = AdminUser::findOrFail($id);
+        $adminuser = AdminUser::findOrFail($adminuser->id);
 
         $roles = Role::all();
         $this->authorize('update', $adminuser);
 
         return view('admin-users.edit', compact('adminuser', 'roles'));
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, AdminUser $adminuser)
     {
-        $adminuser = AdminUser::findOrFail($id);
+        $adminuser = AdminUser::findOrFail($adminuser->id);
         $this->authorize('update', $adminuser);
         $adminuser->name = $request->name;
         $adminuser->username = $request->username;
@@ -109,10 +109,10 @@ class AdminUserController extends Controller
         $adminuser->update();
         return redirect('admin-user');
     }
-    public function destroy($id)
+    public function destroy(AdminUser $adminuser)
     {
         $this->authorize('delete', Auth::user());
-        $adminuser = AdminUser::findOrFail($id);
+        $adminuser = AdminUser::findOrFail($adminuser->id);
         $adminuser->delete();
         return redirect('admin-user');
     }

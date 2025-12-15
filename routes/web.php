@@ -74,9 +74,9 @@ Route::prefix('admin-user')->controller(AdminUserController::class)->middleware(
     Route::get('/','index')->name('admin-user.view');
     Route::get('add','add')->name("admin-user.add");
     Route::post('create','create')->name("admin-user.create");
-    Route::get('edit/{id}','edit')->name("admin-user.edit");
-    Route::post('update/{id}','update')->name("admin-user.update");
-    Route::delete('delete/{id}','destroy')->name('admin-user.delete');
+    Route::get('{adminuser}/edit','edit')->name("admin-user.edit");
+    Route::post('{adminuser}/update','update')->name("admin-user.update");
+    Route::delete('{adminuser}/delete','destroy')->name('admin-user.delete');
 }
 );
 Route::resource('permission',PermissionController::class)->middleware('auth');

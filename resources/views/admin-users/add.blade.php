@@ -22,7 +22,7 @@
     <section>
         <div class="card shadow-lg">
             <div class="card-header text-white" id="h5Div">
-                <h5 class="mb-0">Please Feature Insert!!!</h5>
+                <h5 class="mb-0">Please Admin User Insert!!!</h5>
             </div>
             <div class="card-body">
                 <form action="{{ route('admin-user.create') }}" method="POST" enctype="multipart/form-data">

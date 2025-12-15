@@ -13,7 +13,7 @@
                 <h5 class="mb-0">Admin_User Edit</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin-user.update',$adminuser->id) }}" method="POST">
+                <form action="{{ route('admin-user.update',$adminuser) }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
