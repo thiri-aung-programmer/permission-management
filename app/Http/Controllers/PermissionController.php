@@ -38,7 +38,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        $this->authorize('createPremission', Auth::user());
+        $this->authorize('createPermission', Auth::user());
         $features = Feature::all();
         return view('permissions.add', compact('features'));
     }
@@ -48,7 +48,7 @@ class PermissionController extends Controller
      */
     public function store(PermissionAddRequest $request)
     {
-        $this->authorize('createPremission', Auth::user());
+        $this->authorize('createPermission', Auth::user());
         // အရင်ရေးထားတဲ့ code အစ
         //     Permission::create([
         //     'name' => $request['name'],
@@ -83,9 +83,9 @@ class PermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Permission $permission)
     {
-        $permission = Permission::findOrFail($id);
+        $permission = Permission::findOrFail($permission->id);
         $features = Feature::all();
         return view('permissions.edit', compact('permission', 'features'));
     }
@@ -93,9 +93,9 @@ class PermissionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Permission $permission)
     {
-        $permission = Permission::findOrFail($id);
+        $permission = Permission::findOrFail($permission->id);
         $permission->name = $request->name;
         $permission->feature_id = $request->feature_id;
         $permission->update();
@@ -105,9 +105,9 @@ class PermissionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Permission $permission)
     {
-        $permission = Permission::findOrFail($id);
+        $permission = Permission::findOrFail($permission->id);
         $permission->delete();
         return redirect()->route('permission.index');
     }

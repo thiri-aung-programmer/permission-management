@@ -13,7 +13,7 @@
                 <h5 class="mb-0">Admin_User Edit</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('permission.update',$permission->id) }}" method="POST">
+                <form action="{{ route('permission.update',$permission) }}" method="POST">
                     @csrf
                     @method('PATCH')
                     <div class="mb-3">

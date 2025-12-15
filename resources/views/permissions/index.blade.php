@@ -103,10 +103,10 @@
                
                     <td class="text-center">
                         @can('updatePermission', Auth::user())
-                        <a href="{{ route('permission.edit',$permission->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{ route('permission.edit',$permission) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
                         @endcan
                         @can('deletePermission', Auth::user())
-                            <form action="{{ route('permission.destroy', $permission->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this permission?')" style="display:inline">
+                            <form action="{{ route('permission.destroy', $permission) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this permission?')" style="display:inline">
                                  @csrf                      
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
