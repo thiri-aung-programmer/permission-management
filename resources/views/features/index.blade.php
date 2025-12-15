@@ -69,14 +69,21 @@
 {{-- </style> --}}
 </x-slot:style>
 
-     <h2 class="h2title">Features</h2>
+     <h2 class="h2title">Features</h2>     
     <form action="{{ URL('feature') }}" method="GET">
         <div class="search">
             <input type="text" placeholder="Search" id="search" name="search" value="{{ request('search') }}">
             <Button type="submit" class="btn">Search</Button>
+             @can('createFeature', Auth::user())
             <a href="{{ URL('feature/add') }}" class="addStudentButton ms-3" title="Add Featue"><i class="fa-solid fa-plus"></i></a>
+            @endcan
         </div>
-    </form>
+    </form> 
+    @if(isset($error))
+    <div class="alert alert-danger w-50 m-auto text-center fw-bold">
+        {{ $error }}
+    </div>
+    @endif
     <div class="m-auto w-50">
         <table class="table table-striped table-bordered">
             <thead class="table-dark text-center">
@@ -93,12 +100,16 @@
                     <td>{{$feature->name }}</td>
                
                     <td class="text-center">
+                        @can('updateFeature', Auth::user())
                         <a href="{{ URL('feature/edit',$feature->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                        @endcan
+                        @can('deleteFeature', Auth::user())
                             <form action="{{ route('feature.delete', $feature->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this feature?')" style="display:inline">
                                  @csrf                      
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
                             </form>
+                        @endcan
                     </td>
                 </tr>
                 @endforeach

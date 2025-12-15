@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\FeatueAddRequest;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Feature;
+use Illuminate\Support\Facades\DB;
+
 
 use Illuminate\Http\Request;
+use PHPUnit\Framework\MockObject\Stub\ReturnReference;
 
 class FeatureController extends Controller
 {
@@ -27,11 +31,25 @@ class FeatureController extends Controller
     public function create(FeatueAddRequest $request){
 
     $this->authorize('createFeature', Auth::user());
-    $feature=new Feature();
-    $feature->name = $request->name;
-    
-    $feature->save();
-    return redirect('feature');
+    // အရင်ရေးထားတဲ့ code အစ
+    // $feature=new Feature();
+    // $feature->name = $request->name;    
+    // $feature->save();
+    // return redirect('feature');
+    // အရင်ရေးထားတဲ့ code အဆုံး
+    $data=$request->validated();
+    try{
+        DB::beginTransaction();
+        Feature::create([
+            'name'=>$data['name'],
+        ]);
+        DB::commit();
+        return redirect('feature');
+
+    }catch(Exception $e){
+        DB::rollBack();
+        return back()->with('error','Created Fail"');
+    }
 }
 
 public function edit($id)

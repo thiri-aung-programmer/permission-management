@@ -79,6 +79,11 @@
     @endcan
 </div>
 </form>
+ @if(isset($error))
+    <div class="alert alert-danger w-50 m-auto text-center fw-bold">
+        {{ $error }}
+    </div>
+ @endif
 <div class="m-auto w-50">
     <table class="table table-striped table-bordered">
     <thead class="table-dark text-center">
@@ -98,16 +103,16 @@
                      @can('updateRole', Auth::user())
                     <a href="{{ URL('role/edit',$role->id) }}" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
                     @endcan
-                     @can('deleteRole', Auth::user())
+                    @can('deleteRole', Auth::user())
                     <form action="{{ route('role.delete', $role->id) }}" method="POST" onsubmit="return confirm('Are You Sure To delete this role?')" style="display:inline">
                         @csrf                      
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
                     </form>
-                     @endcan
-                      @can('createPermission', Auth::user())
+                    @endcan
+                    @can('createPermission', Auth::user())
                      <a href="{{ route('role.permissions',$role->id) }}" class="btn btn-primary"><i class="fa-solid fa-key"></i></a>
-                     @endcan
+                    @endcan
                 </td>
             </tr>
         @endforeach

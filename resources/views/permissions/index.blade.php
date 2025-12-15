@@ -79,6 +79,11 @@
             @endcan
         </div>
     </form>
+     @if(isset($error))
+    <div class="alert alert-danger w-50 m-auto text-center fw-bold">
+        {{ $error }}
+    </div>
+    @endif
     <div class="m-auto w-75">
         <table class="table table-striped table-bordered">
             <thead class="table-dark text-center">

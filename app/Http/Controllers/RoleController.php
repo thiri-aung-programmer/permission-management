@@ -7,7 +7,9 @@ use App\Models\AdminUser;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Permission;
 use Illuminate\Http\Request;
+use Exception;
 use App\Http\Requests\RoleAddRequest;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -26,13 +28,27 @@ class RoleController extends Controller
    }
     
     public function create(RoleAddRequest $request){
-
     $this->authorize('createRole', Auth::user());
-    $role=new Role();
-    $role->name = $request->name;
+     // အရင်ရေးထားတဲ့ code အစ
+    // $role=new Role();
+    // $role->name = $request->name;
     
-    $role->save();
-    return redirect('role');
+    // $role->save();
+    // return redirect('role');
+    // အရင်ရေးထားတဲ့ code အဆုံး
+    $data=$request->validated();
+      try{
+        DB::beginTransaction();
+        Role::create([
+            'name'=>$data['name'],
+        ]);
+        DB::commit();
+        return redirect('role');
+
+      }catch(Exception $e){
+         DB::rollBack();
+        return back()->with('error','Created Fail"');
+      }
 }
 
 public function edit($id)

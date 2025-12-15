@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdminUserAddRequest;
 use App\Models\AdminUser;
 use App\Models\Role;
+use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use app\Policies\AdminUserPolicy;
 
 use App\Http\Requests\AdminUserUpdateRequest;
@@ -13,78 +15,106 @@ use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
 {
-    
-    public function index(Request $request){
-    // $students = Student::all();
-    // $adminusers=AdminUser::with("role")->get();
-    // dd($adminusers);
-    $adminusers =AdminUser::with('role')
-    ->when($request->search, function ($query) use ($request) {
-        $search = '%' . $request->search . '%';
 
-        return $query->where(function ($q) use ($search) {
-            $q->where('name', 'like', $search)
-              ->orWhereHas('role', function ($r) use ($search) {
-                  $r->where('name', 'like', $search);
-              });
-        });
-    })->paginate(5);
-    // dd($adminusers);
-    return view("admin-users.index",compact("adminusers"));
-   }
+    public function index(Request $request)
+    {
+        // $students = Student::all();
+        // $adminusers=AdminUser::with("role")->get();
+        // dd($adminusers);
+        $adminusers = AdminUser::with('role')
+            ->when($request->search, function ($query) use ($request) {
+                $search = '%' . $request->search . '%';
 
-    public function create(AdminUserAddRequest $request){
-         $this->authorize('create', Auth::user());
-         AdminUser::create([
-        'name' => $request['name'],
-        'username'=>$request['username'],
-        'role_id'=> $request['role_id'],
-        'phone'=> $request['phone'],
-        'email' => $request['email'],
-        'address'=> $request['address'],
-        'password' => bcrypt($request['pswd']),
-        'is_active'=> $request['is_active'],
-        'gender'=> $request['gender']
-    ]);
-    return redirect('admin-user');
-}
-public function add(){
-    $this->authorize('create', Auth::user());
-    $roles = Role::all();
+                return $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', $search)
+                        ->orWhereHas('role', function ($r) use ($search) {
+                            $r->where('name', 'like', $search);
+                        });
+                });
+            })->paginate(5);
+        // dd($adminusers);
+        return view("admin-users.index", compact("adminusers"));
+    }
 
-    return view('admin-users.add',compact('roles'));
-}
+    public function create(AdminUserAddRequest $request)
+    {
+        $this->authorize('create', Auth::user());
+        // အရင်ရေးထားတဲ့ code အစ
+        //      AdminUser::create([
+        // 'name' => $request['name'],
+        // 'username'=>$request['username'],
+        // 'role_id'=> $request['role_id'],
+        // 'phone'=> $request['phone'],
+        // 'email' => $request['email'],
+        // 'address'=> $request['address'],
+        // 'password' => bcrypt($request['pswd']),
+        // 'is_active'=> $request['is_active'],
+        // 'gender'=> $request['gender']
+        // ]);
+        // return redirect('admin-user');
+        // အရင်ရေးထားတဲ့ code အဆုံး
+        $data = $request->validated();
+        try {
+            DB::beginTransaction();
+            AdminUser::create([
+                'name' => $data['name'],
+                'username' => $data['username'],
+                'role_id' => $data['role_id'],
+                'phone' => $data['phone'],
+                'email' => $data['email'],
+                'address' => $data['address'],
+                'password' => bcrypt($data['pswd']),
+                'is_active' => $data['is_active'],
+                'gender' => $data['gender']
+            ]);
+            DB::commit();
+            return redirect('admin-user');
 
-public function edit($id)
-{
-    $adminuser=AdminUser::findOrFail($id);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Created Fail"');
+        }
 
-    $roles = Role::all();
-    $this->authorize('update', $adminuser);
+    }
+    public function add()
+    {
+        $this->authorize('create', Auth::user());
+        $roles = Role::all();
 
-    return view('admin-users.edit',compact('adminuser','roles'));
-}
-public function update(Request $request, $id){
-     $adminuser=AdminUser::findOrFail($id);
-     $this->authorize('update', $adminuser);
-      $adminuser->name = $request->name;
-       $adminuser->username=$request->username;
-       $adminuser->email = $request->email;
-       $adminuser->password = bcrypt($request->pswd);
-       $adminuser->role_id = $request->role_id;
-       $adminuser->phone= $request->phone;
-        $adminuser->address= $request->address;
-        $adminuser->is_active=$request->is_active;
-        $adminuser->gender = $request->gender;    
-       $adminuser->update();
-    return redirect('admin-user');
-}
-public function destroy($id)
-{
-     $this->authorize('delete', Auth::user());
-    $adminuser=AdminUser::findOrFail($id);
-    $adminuser->delete();
-    return redirect('admin-user');
-}
+        return view('admin-users.add', compact('roles'));
+    }
+
+    public function edit($id)
+    {
+        $adminuser = AdminUser::findOrFail($id);
+
+        $roles = Role::all();
+        $this->authorize('update', $adminuser);
+
+        return view('admin-users.edit', compact('adminuser', 'roles'));
+    }
+    public function update(Request $request, $id)
+    {
+        $adminuser = AdminUser::findOrFail($id);
+        $this->authorize('update', $adminuser);
+        $adminuser->name = $request->name;
+        $adminuser->username = $request->username;
+        $adminuser->email = $request->email;
+        $adminuser->password = bcrypt($request->pswd);
+        $adminuser->role_id = $request->role_id;
+        $adminuser->phone = $request->phone;
+        $adminuser->address = $request->address;
+        $adminuser->is_active = $request->is_active;
+        $adminuser->gender = $request->gender;
+        $adminuser->update();
+        return redirect('admin-user');
+    }
+    public function destroy($id)
+    {
+        $this->authorize('delete', Auth::user());
+        $adminuser = AdminUser::findOrFail($id);
+        $adminuser->delete();
+        return redirect('admin-user');
+    }
 
 }

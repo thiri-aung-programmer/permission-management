@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PermissionAddRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Permission;
 use App\Models\Feature;
+use Exception;
 
 class PermissionController extends Controller
 {
@@ -15,20 +17,20 @@ class PermissionController extends Controller
      */
     public function index(Request $request)
     {
-         $this->authorize('viewPermission', Auth::user());
-         $permissions =Permission::with('feature')
-    ->when($request->search, function ($query) use ($request) {
-        $search = '%' . $request->search . '%';
+        $this->authorize('viewPermission', Auth::user());
+        $permissions = Permission::with('feature')
+            ->when($request->search, function ($query) use ($request) {
+                $search = '%' . $request->search . '%';
 
-        return $query->where(function ($q) use ($search) {
-            $q->where('name', 'like', $search)
-              ->orWhereHas('feature', function ($r) use ($search) {
-                  $r->where('name', 'like', $search);
-              });
-        });
-    })->paginate(5);
-    // dd($adminusers);
-    return view("permissions.index",compact("permissions"));
+                return $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', $search)
+                        ->orWhereHas('feature', function ($r) use ($search) {
+                            $r->where('name', 'like', $search);
+                        });
+                });
+            })->paginate(5);
+        // dd($adminusers);
+        return view("permissions.index", compact("permissions"));
     }
 
     /**
@@ -38,7 +40,7 @@ class PermissionController extends Controller
     {
         $this->authorize('createPremission', Auth::user());
         $features = Feature::all();
-        return view('permissions.add',compact('features'));
+        return view('permissions.add', compact('features'));
     }
 
     /**
@@ -46,12 +48,28 @@ class PermissionController extends Controller
      */
     public function store(PermissionAddRequest $request)
     {
-          $this->authorize('createPremission', Auth::user());
-        Permission::create([
-        'name' => $request['name'],
-        'feature_id'=> $request['feature_id']
-         ]);
-       return  redirect()->route('permission.index');
+        $this->authorize('createPremission', Auth::user());
+        // အရင်ရေးထားတဲ့ code အစ
+        //     Permission::create([
+        //     'name' => $request['name'],
+        //     'feature_id'=> $request['feature_id']
+        //      ]);
+        //    return  redirect()->route('permission.index');
+        // အရင်ရေးထားတဲ့ code အဆုံး
+        $data = $request->validated();
+        try {
+            DB::beginTransaction();
+            Permission::create([
+                'name' => $data['name'],
+                'feature_id' => $data['feature_id']
+            ]);
+            DB::commit();
+            return redirect()->route('permission.index');
+
+        } catch (Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Created Fail"');
+        }
     }
 
     /**
@@ -67,9 +85,9 @@ class PermissionController extends Controller
      */
     public function edit(string $id)
     {
-        $permission=Permission::findOrFail($id);
+        $permission = Permission::findOrFail($id);
         $features = Feature::all();
-        return view('permissions.edit',compact('permission','features'));
+        return view('permissions.edit', compact('permission', 'features'));
     }
 
     /**
@@ -77,11 +95,11 @@ class PermissionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $permission=Permission::findOrFail($id);
+        $permission = Permission::findOrFail($id);
         $permission->name = $request->name;
-        $permission->feature_id= $request->feature_id;
+        $permission->feature_id = $request->feature_id;
         $permission->update();
-        return  redirect()->route('permission.index'); 
+        return redirect()->route('permission.index');
     }
 
     /**
@@ -89,7 +107,7 @@ class PermissionController extends Controller
      */
     public function destroy(string $id)
     {
-        $permission=Permission::findOrFail($id);
+        $permission = Permission::findOrFail($id);
         $permission->delete();
         return redirect()->route('permission.index');
     }
