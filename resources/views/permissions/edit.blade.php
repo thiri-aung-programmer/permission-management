@@ -39,7 +39,7 @@
                         
                     </div>
                     
-                    <button type="submit" class="btn btn-danger fw-bold px-3 py-1">Update</button>
+                    <button type="submit" class="btn btn-success fw-bold px-3 py-1">Update</button>
                     <a href="#" class="btn btn-danger fw-bold px-3 py-1 ms-2" onclick="history.back()">Cancel</a>
                 </form>
             </div>
