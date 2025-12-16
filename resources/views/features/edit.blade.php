@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout-edit>
 <x-header>
     <title>Feature Editing</title>
 </x-header>
@@ -21,10 +21,11 @@
                     </div>
                     
                     <button type="submit" class="btn btn-danger fw-bold px-3 py-1">Update</button>
+                    <a href="#" class="btn btn-danger fw-bold px-3 py-1 ms-2" onclick="history.back()">Cancel</a>
                 </form>
             </div>
         </div>
     </section>
 <x-slot:scripts>
   </x-slot:scripts>
-</x-layout>
+</x-layout-edit>
