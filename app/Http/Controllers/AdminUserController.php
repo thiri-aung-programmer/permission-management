@@ -97,24 +97,45 @@ class AdminUserController extends Controller
     {
         $adminuser = AdminUser::findOrFail($adminuser->id);
         $this->authorize('update', $adminuser);
-        $adminuser->name = $request->name;
-        $adminuser->username = $request->username;
-        $adminuser->email = $request->email;
-        $adminuser->password = bcrypt($request->pswd);
-        $adminuser->role_id = $request->role_id;
-        $adminuser->phone = $request->phone;
-        $adminuser->address = $request->address;
-        $adminuser->is_active = $request->is_active;
-        $adminuser->gender = $request->gender;
-        $adminuser->update();
-        return redirect('admin-user');
+        try{
+            DB::beginTransaction();
+                
+                $adminuser->name = $request->name;
+                $adminuser->username = $request->username;
+                $adminuser->email = $request->email;
+                $adminuser->password = bcrypt($request->pswd);
+                $adminuser->role_id = $request->role_id;
+                $adminuser->phone = $request->phone;
+                $adminuser->address = $request->address;
+                $adminuser->is_active = $request->is_active;
+                $adminuser->gender = $request->gender;
+                $adminuser->update();
+
+            DB::commit();
+            return redirect('admin-user');
+
+        }catch (Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Updated Fail"');
+        }
+        
     }
     public function destroy(AdminUser $adminuser)
     {
         $this->authorize('delete', Auth::user());
         $adminuser = AdminUser::findOrFail($adminuser->id);
-        $adminuser->delete();
-        return redirect('admin-user');
+        try{
+            DB::beginTransaction();
+                $adminuser->delete();
+
+            DB::commit();
+            return redirect('admin-user');
+        }catch (Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Delete Fail"');
+        }
+        
+        
     }
 
     

@@ -85,6 +85,7 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
+        $this->authorize('updatePermission', Auth::user());
         $permission = Permission::findOrFail($permission->id);
         $features = Feature::all();
         return view('permissions.edit', compact('permission', 'features'));
@@ -95,11 +96,19 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
+        $this->authorize('updatePermission', Auth::user());
         $permission = Permission::findOrFail($permission->id);
-        $permission->name = $request->name;
-        $permission->feature_id = $request->feature_id;
-        $permission->update();
-        return redirect()->route('permission.index');
+        try{
+            DB::beginTransaction();
+                $permission->name = $request->name;
+                $permission->feature_id = $request->feature_id;
+                $permission->update();
+            DB::commit();
+            return redirect()->route('permission.index');
+        }catch (Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Updated Fail"');
+        }               
     }
 
     /**
@@ -107,8 +116,17 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        $permission = Permission::findOrFail($permission->id);
-        $permission->delete();
-        return redirect()->route('permission.index');
+        $this->authorize('deletePermission', Auth::user());
+        $permission = Permission::findOrFail($permission->id);         
+        try{
+            DB::beginTransaction();
+                 $permission->delete();
+            DB::commit();
+            return redirect()->route('permission.index');
+        }catch (Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Updated Fail"');
+        }       
+        
     }
 }
