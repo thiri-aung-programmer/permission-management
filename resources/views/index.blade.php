@@ -50,7 +50,8 @@
                     <div class="flex gap-4 justify-end mt-3">
                     <input type="submit" value="Login" class="btn btn-primary rounded-full">
                     {{-- <button class="btn btn-primary rounded-full" id="btnConfirm">Confirm</button> --}}
-                    <button class="btn btn-danger rounded-full" id="btnCancel">Cancel</button>
+                    {{-- <input type="reset" value="Cancel" class="btn btn-danger rounded-full" id="btnCancel"> --}}
+                    {{-- <button class="btn btn-danger rounded-full" id="btnCancel">Cancel</button> --}}
                     </div>
                 </form>
                 
