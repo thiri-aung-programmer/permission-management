@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Login routes
+// Route::view('/test','loginpage');
 Route::get("/", [HomeController::class,'index'])->middleware('guest')->name('home');
 Route::view('/login', 'auth.login')
 
