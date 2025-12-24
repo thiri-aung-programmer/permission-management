@@ -56,13 +56,13 @@ class FeatureController extends Controller
     public function edit(Feature $feature)
     {
         $this->authorize('updateFeature', Auth::user());
-        $feature = Feature::findOrFail($feature->id);        
+        // $feature = Feature::findOrFail($feature->id);        
         return view('features.edit', compact('feature'));
     }
     public function update(Request $request, Feature $feature)
     {
         $this->authorize('updateFeature', Auth::user());
-        $feature = Feature::findOrFail($feature->id);       
+        // $feature = Feature::findOrFail($feature->id);       
             try{
             DB::beginTransaction();
                 $feature->name = $request->name;
@@ -78,7 +78,7 @@ class FeatureController extends Controller
     public function destroy(Feature $feature)
     {
         $this->authorize('deleteFeature', Auth::user());
-        $feature = Feature::findOrFail($feature->id);        
+        // $feature = Feature::findOrFail($feature->id);        
         try{
             DB::beginTransaction();
                 $feature->delete();

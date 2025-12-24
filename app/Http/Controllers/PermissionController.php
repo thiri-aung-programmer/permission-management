@@ -86,7 +86,7 @@ class PermissionController extends Controller
     public function edit(Permission $permission)
     {
         $this->authorize('updatePermission', Auth::user());
-        $permission = Permission::findOrFail($permission->id);
+        // $permission = Permission::findOrFail($permission->id);
         $features = Feature::all();
         return view('permissions.edit', compact('permission', 'features'));
     }
@@ -97,7 +97,7 @@ class PermissionController extends Controller
     public function update(Request $request, Permission $permission)
     {
         $this->authorize('updatePermission', Auth::user());
-        $permission = Permission::findOrFail($permission->id);
+        // $permission = Permission::findOrFail($permission->id);
         try{
             DB::beginTransaction();
                 $permission->name = $request->name;
@@ -117,7 +117,7 @@ class PermissionController extends Controller
     public function destroy(Permission $permission)
     {
         $this->authorize('deletePermission', Auth::user());
-        $permission = Permission::findOrFail($permission->id);         
+        // $permission = Permission::findOrFail($permission->id);         
         try{
             DB::beginTransaction();
                  $permission->delete();

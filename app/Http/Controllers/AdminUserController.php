@@ -86,7 +86,7 @@ class AdminUserController extends Controller
 
     public function edit(AdminUser $adminuser)
     {
-        $adminuser = AdminUser::findOrFail($adminuser->id);
+        // $adminuser = AdminUser::findOrFail($adminuser->id);
 
         $roles = Role::all();
         $this->authorize('update', $adminuser);
@@ -95,7 +95,7 @@ class AdminUserController extends Controller
     }
     public function update(Request $request, AdminUser $adminuser)
     {
-        $adminuser = AdminUser::findOrFail($adminuser->id);
+        // $adminuser = AdminUser::findOrFail($adminuser->id);
         $this->authorize('update', $adminuser);
         try{
             DB::beginTransaction();
@@ -123,7 +123,7 @@ class AdminUserController extends Controller
     public function destroy(AdminUser $adminuser)
     {
         $this->authorize('delete', Auth::user());
-        $adminuser = AdminUser::findOrFail($adminuser->id);
+        // $adminuser = AdminUser::findOrFail($adminuser->id);
         try{
             DB::beginTransaction();
                 $adminuser->delete();

@@ -54,12 +54,12 @@ class RoleController extends Controller
 public function edit(Role $role)
 {
     $this->authorize('updateRole', Auth::user());
-    $role=Role::findOrFail($role->id);     
+    // $role=Role::findOrFail($role->id);     
     return view('roles.edit',compact('role'));
 }
 public function update(Request $request, Role $role){
      $this->authorize('updateRole', Auth::user());
-     $role=Role::findOrFail($role->id);
+    //  $role=Role::findOrFail($role->id);
      try{
             DB::beginTransaction();
              $role->name = $request->name;
@@ -77,7 +77,7 @@ public function update(Request $request, Role $role){
 public function destroy(Role $role)
 {
     $this->authorize('deleteRole', Auth::user());    
-    $role=Role::findOrFail($role->id);
+    // $role=Role::findOrFail($role->id);
     try{
             DB::beginTransaction();
             $role->delete();
@@ -92,7 +92,7 @@ public function destroy(Role $role)
 }
 public function showpermissions(Role $role){
     $this->authorize('viewPermission', Auth::user());
-    $role=Role::findOrFail($role->id);
+    // $role=Role::findOrFail($role->id);
     $permissions = Permission::all();
     $assigned = $role->permissions->pluck('id')->toArray();
     return view('roles.rolepermissions',compact('role','permissions','assigned'));
@@ -100,7 +100,7 @@ public function showpermissions(Role $role){
 public function updatePermissions(Request $request, Role $role)
 {
     $this->authorize('updatePermission', Auth::user());
-    $data = Role::findOrFail($role->id);   
+    // $data = Role::findOrFail($role->id);   
 
     // $newPermissions = $request->input('permissions', []);
     // $existing = $role->permissions->pluck('id')->toArray();
@@ -115,7 +115,7 @@ public function updatePermissions(Request $request, Role $role)
     $newPermissions = $request->input('permissions', []);
 
      // sync will attach new ones and detach removed ones automatically
-      $data->permissions()->sync($newPermissions);
+      $role->permissions()->sync($newPermissions);
     
       return redirect('role');
 }
