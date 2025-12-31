@@ -24,16 +24,16 @@ class AdminUserSeeder extends Seeder
         ]
         );
          $adminuser = [
-            ['name' => 'Mg Mg',            
+            'name' => 'Mg Mg',            
             'username'=>'Mg Mg',
             'phone'=>'091234567',
             'email'=>'mgmg@gmail.com',
             'address'=>'Mandalay',
-            'password'=> bcrypt('mgmg123'),
+            'password'=> 'mgmg123',
             'is_active'=>'1',
             'gender'=>'1',
             'role_id'=>1
-        ],
+        
             
             ];
 

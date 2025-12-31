@@ -39,8 +39,8 @@ class PermissionSeeder extends Seeder
 
             foreach ($permissions as $permission) {
             Permission::firstOrCreate([
-                'name' => $permissions['name'],
-                'feature_id' => $permissions['feature_id']
+                'name' => $permission['name'],
+                'feature_id' => $permission['feature_id']
             ]);
         }
     }

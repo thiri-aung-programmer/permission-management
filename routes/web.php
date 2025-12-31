@@ -7,11 +7,13 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Logout;
+use App\Livewire\Counter;
 use Illuminate\Support\Facades\Route;
 
 
 // Login routes
 // Route::view('/test','loginpage');
+Route::get('/test',Counter::class);
 Route::get("/", [HomeController::class,'index'])->middleware('guest')->name('home');
 Route::view('/login', 'auth.login')
 
