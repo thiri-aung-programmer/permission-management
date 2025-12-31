@@ -3,9 +3,7 @@
 namespace App\Policies;
 
 use App\Models\AdminUser;
- use App\Models\Role;
- use App\Models\Permission;
-use Illuminate\Auth\Access\Response;
+use App\Models\Role;
 
 class RolePolicy
 {
@@ -20,20 +18,21 @@ class RolePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function viewRole(AdminUser $model): bool
-    {
-        if ($model->hasPermission('role', 'view')) {
-            return true;
+    // note: policy first arg $model သည် auth user default ပါ
+        public function viewRole(AdminUser $model): bool
+        {
+            if ($model->hasPermission('role', 'view')) {
+                return true;
+            }
+            return false;
         }
-        return false;
-    }
 
     /**
      * Determine whether the user can create models.
      */
     public function createRole(AdminUser $adminUser): bool
     {
-         if ($adminUser->hasPermission('role', 'add')) {
+        if ($adminUser->hasPermission('role', 'add')) {
             return true;
         }
         return false;
@@ -42,7 +41,7 @@ class RolePolicy
     /**
      * Determine whether the user can update the model.
      */
-    
+
     public function updateRole(AdminUser $authUser, AdminUser $targetUser): bool
     {
         // 🔐 Permission based (edit-user)
@@ -50,11 +49,11 @@ class RolePolicy
         if ($authUser->hasPermission('role', 'edit')) {
             return true;
         }
-       
+
         // 👤 Owner based (edit own profile)
         return false;
     }
-    
+
     /**
      * Determine whether the user can delete the model.
      */
@@ -73,7 +72,7 @@ class RolePolicy
         if ($authUser->hasPermission('permission', 'edit')) {
             return true;
         }
-       
+
         // 👤 Owner based (edit own profile)
         return false;
     }
@@ -85,7 +84,7 @@ class RolePolicy
         if ($authUser->hasPermission('permission', 'view')) {
             return true;
         }
-       
+
         // 👤 Owner based (edit own profile)
         return false;
     }

@@ -22,12 +22,13 @@ class RoleAddRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name"=> "required|string|max:255"
+            "name" => "required|string|max:255"
         ];
     }
-    public function messages(): array{
-        return [ 
-                "name.required"=>"Please Fill Role Name",
+    public function messages(): array
+    {
+        return [
+            "name.required" => "Please Fill Role Name",
         ];
     }
 }

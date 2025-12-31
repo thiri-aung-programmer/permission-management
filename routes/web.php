@@ -11,76 +11,56 @@ use Illuminate\Support\Facades\Route;
 
 
 // Login routes
-// Route::view('/test','loginpage');
-Route::get("/", [HomeController::class,'index'])->middleware('guest')->name('home');
-Route::view('/login', 'auth.login')
+Route::middleware('guest')->group(function () {
 
-    ->middleware('guest')
+    // Route::get("/", )->name('home');
+    Route::get('/login', [HomeController::class, 'index'])->name('login');
+    Route::post('/login', Login::class);
 
-    ->name('login');
+});
 
- 
+// note: middlewrare auth တွေကို တစ်ခါသာ သုံး၍ group ဖွဲ့နိုင်
+Route::middleware('auth')->group(function () {
 
-Route::post('/login', Login::class)
+    Route::get("/", [HomeController::class, "dashboard"])->name("dashboard");
 
-    ->middleware('guest');
+    Route::post('/logout', Logout::class)->name('logout');
 
- 
+    Route::prefix('role')->controller(RoleController::class)->group(
+        function () {
+            Route::get('/', 'index')->name('role.view');
+            Route::get('add', 'add')->name('role.add');
+            Route::post('create', 'create')->name('role.create');
+            Route::get('{role}/edit', 'edit')->name('role.edit');
+            Route::post('{role}/update', 'update')->name('role.update');
+            Route::delete('{role}/delete', 'destroy')->name('role.delete');
+            Route::get('{role}/permissions', 'showpermissions')->name('role.permissions');
+            Route::post('{role}/updatePermission', 'updatePermissions')->name('role.updatePermission');
+            Route::get('viewPermissionRole', 'viewPermissionRole')->name('role.viewPermissionRole');
+        }
+    );
 
-// Logout route
+    Route::prefix('feature')->controller(FeatureController::class)->group(
+        function () {
+            Route::get('/', 'index')->name('feature.view');
+            Route::get('add', 'features.add');
+            Route::post('create', 'create');
+            Route::get('{feature}/edit', 'edit')->name('feature.edit');
+            Route::post('{feature}/update', 'update')->name('feature.update');
+            Route::delete('{feature}/delete', 'destroy')->name('feature.delete');
+        }
+    );
 
-// Route::get('/logout', [Logout::class, 'logout']);
-Route::post('/logout', Logout::class)
-
-    ->middleware('auth')
-
-    ->name('logout');
-
-
-    // Route::get('/dashboard', function () {
-    //     return view("login");
-    // })->name('dashboard');
-    Route::get("/dashboard",[HomeController::class,"dashboard"])->name("dashboard");
-
-// Route::post('/login',route('admin-user.view'));
-// Route::post('/login', [Login::class, 'login'])->name('login');
-Route::prefix('role')->controller(RoleController::class)->middleware('auth')->group(function () {
-  
-    Route::get('/','index')->name('role.view');
-    Route::view('add','roles.add')->name('role.add');
-    Route::post('create','create')->name('role.create');
-    Route::get('{role}/edit','edit')->name('role.edit');
-    Route::post('{role}/update','update')->name('role.update');
-    Route::delete('{role}/delete','destroy')->name('role.delete');
-    Route::get('{role}/permissions','showpermissions')->name('role.permissions');
-    Route::post('{role}/updatePermission','updatePermissions')->name('role.updatePermission');
-    Route::get('viewPermissionRole','viewPermissionRole')->name('role.viewPermissionRole');
-   
-}
-);
-
-Route::prefix('feature')->controller(FeatureController::class)->middleware('auth')->group(function () {
-   
-    Route::get('/','index')->name('feature.view');
-    Route::view('add','features.add');
-    Route::post('create','create');
-    Route::get('{feature}/edit','edit')->name('feature.edit');
-    Route::post('{feature}/update','update')->name('feature.update');
-    Route::delete('{feature}/delete','destroy')->name('feature.delete');
-}
-);
-
-Route::prefix('admin-user')->controller(AdminUserController::class)->middleware('auth')->group(function () {
-   
-    Route::get('/','index')->name('admin-user.view');
-    Route::get('add','add')->name("admin-user.add");
-    Route::post('create','create')->name("admin-user.create");
-    Route::get('{adminuser}/edit','edit')->name("admin-user.edit");
-    Route::post('{adminuser}/update','update')->name("admin-user.update");
-    Route::delete('{adminuser}/delete','destroy')->name('admin-user.delete');
-   
-}
-);
-Route::resource('permission',PermissionController::class)->middleware('auth');
- 
+    Route::prefix('admin-user')->controller(AdminUserController::class)->group(
+        function () {
+            Route::get('/', 'index')->name('admin-user.view');
+            Route::get('add', 'add')->name("admin-user.add");
+            Route::post('create', 'create')->name("admin-user.create");
+            Route::get('{adminuser}/edit', 'edit')->name("admin-user.edit");
+            Route::post('{adminuser}/update', 'update')->name("admin-user.update");
+            Route::delete('{adminuser}/delete', 'destroy')->name('admin-user.delete');
+        }
+    );
+    Route::resource('permission', PermissionController::class);
+});
 

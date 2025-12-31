@@ -11,19 +11,19 @@ class FeatureSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-   
+
     public function run(): void
     {
         //
-         $features = [
+        $features = [
             ['name' => 'user'],
             ['name' => 'role'],
             ['name' => 'feature'],
             ['name' => 'permission'],
             ['name' => 'stock'],
-            ];
+        ];
 
-            foreach ($features as $feature) {
+        foreach ($features as $feature) {
             Feature::firstOrCreate([
                 'name' => $feature['name']
             ]);

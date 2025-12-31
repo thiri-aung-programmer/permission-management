@@ -19,11 +19,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-         $this->call([
-        FeatureSeeder::class,
+        $this->call([
+            FeatureSeeder::class,
         ]);
         $this->call([
-        PermissionSeeder::class,
+            PermissionSeeder::class,
+        ]);
+        $this->call([
+            AdminUserSeeder::class
         ]);
     }
 }
