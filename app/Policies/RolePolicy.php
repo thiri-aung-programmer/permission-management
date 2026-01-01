@@ -20,6 +20,7 @@ class RolePolicy
     /**
      * Determine whether the user can view the model.
      */
+     // note: policy first arg $model သည် auth user default ပါ
     public function viewRole(AdminUser $model): bool
     {
         if ($model->hasPermission('role', 'view')) {
