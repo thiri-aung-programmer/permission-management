@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Role;
+use App\Models\Permission;
 use App\Models\AdminUser;
 
 class AdminUserSeeder extends Seeder
@@ -15,7 +16,8 @@ class AdminUserSeeder extends Seeder
    
     public function run(): void
     {
-        //
+        
+        // note: role should have permissoin 
         $role=Role::firstOrCreate([
             "name"=> "admin",
         ],
@@ -23,6 +25,7 @@ class AdminUserSeeder extends Seeder
             "name"=> "admin",
         ]
         );
+            // NOTE တစ်ယောက်အတွက်ပဲ first သုံးမယ်ဆို one-dim array ဖြစ်ရပါမယ်
          $adminuser = [
             'name' => 'Mg Mg',            
             'username'=>'Mg Mg',
@@ -32,12 +35,14 @@ class AdminUserSeeder extends Seeder
             'password'=> 'mgmg123',
             'is_active'=>'1',
             'gender'=>'1',
-            'role_id'=>1
+            'role_id'=> $role->id // NOTE ဒါမျိုးသုံးပါ
         
             
             ];
 
-           
+           $permission_ids = Permission::pluck('id')->toArray();
+             $role->permissions()->attach($permission_ids);
+          
             AdminUser::firstOrCreate([
                  'email'=>'mgmg@gmail.com',
             ],
