@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 
 // Login routes
 // Route::view('/test','loginpage');
+Route::get('/stock', function () {
+    return view('stock');
+});
 Route::get('/test',Counter::class);
 Route::get("/", [HomeController::class,'index'])->middleware('guest')->name('home');
 Route::view('/login', 'auth.login')
