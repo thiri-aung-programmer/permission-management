@@ -1,0 +1,204 @@
+/* media scree ကူးရန် */
+ /* Extra small devices (portrait phones, less than 576px) */
+ @media (max-width: 575.98px) { 
+
+ }
+
+ /* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) { 
+
+ }
+
+ /* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) { 
+
+ }
+
+ /* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+
+ }
+
+ /* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+ }
+
+ /* media screen ကူးရန်အဆုံး */
+ 
+body{
+   background-image: linear-gradient(to right top,rgb(100, 100, 100),rgb(100, 100, 100),rgb(100, 101, 100));
+   background-size: cover;
+}
+ .adminbody .container{
+   min-height: 420px;
+   padding:2rem;
+   /* display: inline-flex; */
+   /* flex-wrap: nowrap; */
+   /* background-color: antiquewhite; */
+ }
+ .container .myform{
+    width:50%;
+    margin:50px auto;
+    display: block;
+    background-color: rgb(253, 253, 180);
+    padding:1.5rem;
+    border-radius: 15%;
+    /*border: 1px solid;
+    *//*padding: 10px;
+    *//*box-shadow:;
+    h-offsetv-offsetblurspreadcolor*/
+    box-shadow: 5px 10px 18px 10px rgb(126, 120, 29);
+    -webkit-border-radius: 15%;
+    -moz-border-radius: 15%;
+    -ms-border-radius: 15%;
+    -o-border-radius: 15%;
+}
+.myform .btn{
+   border-radius: 15%;
+   -webkit-border-radius: 15%;
+   -moz-border-radius: 15%;
+   -ms-border-radius: 15%;
+   -o-border-radius: 15%;
+   color:rgb(249, 243, 60);
+   text-shadow: 1px 1px 1px gray;
+   font-weight: bold;
+   box-shadow: inset 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+.myform .btn:hover {
+   /* transform: translateY(5px); */
+   box-shadow: inset 0px 10px 20px 2px rgba(0, 0, 0, 0.25);
+ }
+ .myform .btn-primary{
+   background-color: rgb(50, 134, 245);
+ }
+ .myform .btn-danger{
+   background-color: rgb(252, 71, 92);
+ }
+ .myform input,select{
+   box-shadow: inset 0px 10px 20px 2px rgba(188, 167, 2, 0.5);
+   /* color:rgb(248, 245, 150); */
+   text-shadow: 1px 1px 1px rgb(81, 78, 1);
+   /* line-height: 2.4rem; */
+ }
+ .myform label{
+   font-weight: bold;
+   color:rgb(113, 63, 2);
+   text-shadow: 1px 1px 1px rgb(255, 255, 255);
+   font-size: 2rem;
+   line-height: 2.4rem;
+   font-family: 'Catharsis Macchiato';
+ }
+ .error{
+   width:70%;
+   margin:20px 15%;
+   font-weight: bold;
+   color:red;
+   text-shadow: 1px 1px 1px black,5px 5px 5px rgb(253, 253, 253), 5px 5px 5px black;
+   display: inline-block;
+   text-align: center;
+   font-family: 'Kristen ITC';
+   letter-spacing: 0.15rem;
+   padding:1.5rem 1rem;
+   border-radius: 7%;
+   background-color: rgb(255, 255, 255);
+   -webkit-border-radius: 7%;
+   -moz-border-radius: 7%;
+   -ms-border-radius: 7%;
+   -o-border-radius: 7%;
+   /* border-image: url('https://media.giphy.com/media/Qh6aPCssL8J8I/giphy.gif?cid=790b7611bcxol734xcf1kpy7kt0kwi0ywd8y8o57fsahqz01&ep=v1_gifs_search&rid=giphy.gif&ct=g') 1;
+   border-image-width: 5px; */
+   position:relative;
+   overflow:hidden;
+}
+/* animation အစ */
+.error span:nth-child(1) {
+  /*အပေါ်ကပြေးတဲ့လိုင်းအတွက်*/position: absolute;
+  /*သူ့parentaမှာrelativeထားပေးရန်လို*/top: 0;
+  left: 0;
+  height: 8px;
+  width: 100%;
+  /*background: linear-gradient(90deg, transparent, yellow);
+  */background-image: url('images/dangerframe.jpg');
+  animation: ani1 0.75s linear infinite;
+  -webkit-animation: ani1 0.75s linear infinite;
+}
+.error span:nth-child(2) {
+  /*ညာဘက်ပြေးတဲ့လိုင်းအတွက်*/position: absolute;
+  /*သူ့parentaမှာrelativeထားပေးရန်လို*/top: 100%;
+  right: 0;
+  height: 100%;
+  width: 8px;
+  /*background: linear-gradient(180deg, transparent, yellow);
+  */background-image: url('images/dangerframe.jpg');
+  animation: ani2 0.75s linear infinite;
+  animation-delay: 0.5s;
+  /*ပထမဟာနဲ့ဒါလေးပဲကွာ*/
+  -webkit-animation: ani2 0.75s linear infinite;
+}
+
+.error span:nth-child(3) {
+  /*အောက်ကပြေးတဲ့လိုင်းအတွက်*/position: absolute;
+  /*သူ့parentaမှာrelativeထားပေးရန်လို*/bottom: 0;
+  right: -100%;
+  height: 8px;
+  width: 100%;
+  /*background: linear-gradient(270deg, transparent, yellow);
+  */background-image: url('images/dangerframe.jpg');
+  animation: ani3 0.75s linear infinite;
+  animation-delay: 0.75s;
+  -webkit-animation: ani3 0.75s linear infinite;
+}
+
+.error span:nth-child(4) {
+  /*ဘယ်ဘက်ပြေးတဲ့လိုင်းအတွက်*/position: absolute;
+  /*သူ့parentaမှာrelativeထားပေးရန်လို*/bottom: 100%;
+  left: 0;
+  height: 100%;
+  width: 8px;
+  /*background: linear-gradient(360deg, transparent, yellow);
+  */animation: ani4 0.75s linear infinite;
+  background-image: url('images/dangerframe.jpg');
+  animation-delay: 1s;
+   /* ပထမဟာနဲ့ ဒါလေးပဲကွာ */
+  -webkit-animation: ani4 0.75s linear infinite;
+}
+/* animation အဆုံး */
+
+@keyframes ani1 {
+  0% {
+      left: -100%;
+  }
+  50%,
+  100% {
+      left: 100%;/* ပထမဟာနဲ့ ဒါလေးပဲကွာ */
+  }
+}
+
+@keyframes ani2 {
+  0% {
+      top: -100%; 
+  }
+  50%,
+  100% {
+      top: 100%; /* ပထမဟာနဲ့ ဒါလေးပဲကွာ */
+  }
+}
+@keyframes ani3 {
+  0% {
+      right: -100%;
+  }
+  50%, 100% {
+      right: 100%; /* ပထမဟာနဲ့ ဒါလေးပဲကွာ */
+  }
+}
+
+@keyframes ani4 {
+  0% {
+      bottom: -100%;
+  }
+  50%,
+  100% {
+      bottom: 100%; /* ပထမဟာနဲ့ ဒါလေးပဲကွာ */
+  }
+}
