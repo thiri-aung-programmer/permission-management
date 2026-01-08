@@ -1,4 +1,6 @@
- 
+ @layer components{
+
+    
 header{
     /*background-image:url(images/bg.jpg);
     */background-color: rgba(252, 238, 77,1);
@@ -542,3 +544,6 @@ footer .footertext{
     }
    
  }
+ }
+
+ 
