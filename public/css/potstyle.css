@@ -66,12 +66,17 @@ body{
 }
 .potcard .bg table{
    border:0;
+   
+   /* text-align: center; */
+   /* background-color: transparent; */
+   /* min-width:100%;
+   margin:auto; */
    margin:0.7rem 0.3rem;
-   border-radius: 15px;
-   -webkit-border-radius: 15px;
-   -moz-border-radius: 15px;
-   -ms-border-radius: 15px;
-   -o-border-radius: 15px;
+   border-radius: 30px;
+   -webkit-border-radius: 30px;
+   -moz-border-radius: 30px;
+   -ms-border-radius: 30px;
+   -o-border-radius: 30px;
    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 .potcard .bg table td,th{
@@ -83,19 +88,26 @@ body{
 .potcard .bg table tr{
     background-color: bisque;   
     border:0;
+    /* width:100%; */
 }
 
 .potcard .bg table tr:nth-child(1){
     background-color: rgb(247, 186, 112);
     color: darkblue;
 }
-.potcard .bg table td:nth-child(odd),th:nth-child(odd){
+.potcard .bg table td:nth-child(odd){
+    /* background: red; */
     text-align: left;
     width:45%;
 }
-.potcard .bg table td:nth-child(even),th:nth-child(even){
+.potcard .bg table th:nth-child(odd){
+    
+    text-align: left;
+    width:60%;
+}
+.potcard .bg  table td:nth-child(even),th:nth-child(even){
     text-align: center;
-    width:55%;
+    width:40%;
 }
 .potcard:hover .bg{
     top:-50%;

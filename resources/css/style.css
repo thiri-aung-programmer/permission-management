@@ -158,9 +158,8 @@ header .right .pot1{
 footer{
     height: 230px;
     width: 100%;
-    border:0;
-   
-    background-image: url('images/footerbg.png');
+    border:0;   
+    background-image: url(images/footerbg.png);
     opacity: 0.85;
     background-size: cover;
 }

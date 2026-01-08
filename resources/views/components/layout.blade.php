@@ -92,7 +92,7 @@
                 <li class="{{ request()->routeIs('role.viewPermissionRole') ? 'active' : '' }}"><a href="{{route('role.viewPermissionRole')}}">Permissions By Roles</a></li>
             @endcan
              @can('viewStock', Auth::user())
-                <li class="{{ request()->routeIs('stock.view') ? 'active' : '' }}"><a href="stock">Stock</a></li>
+                <li class="{{ request()->routeIs('stock.view') ? 'active' : '' }}"><a href="{{ route('flowerpot') }}">Stock</a>
             @endcan
                 <li>
                     {{-- login logout  --}}

@@ -8,11 +8,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Logout;
 use App\Livewire\Counter;
+use App\Livewire\FlowerPotCrud;
 use Illuminate\Support\Facades\Route;
 
 
 // Login routes
 // Route::view('/test','loginpage');
+Route::get("/pots", FlowerPotCrud::class)->name('flowerpot');
 Route::get('/stock', function () {
     return view('stock');
 });

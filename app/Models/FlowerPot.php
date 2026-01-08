@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class FlowerPot extends Model
 {
     use SoftDeletes;
+    protected $table = 'flower_pots';
     protected $fillable = [
         'name',        
         'images',	 	 	 	 	 	 	 	
