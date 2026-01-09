@@ -78,7 +78,7 @@
             </div>
 
             <div class="text-center py-4">
-                <input type="submit" class="btn btn-primary px-3 py-2 me-3" value="Insert">
+                <input type="submit" class="btn btn-primary px-3 py-2 me-3" value="{{  $isEdit? 'Update':'Insert' }}">
                 <input type="reset" class="btn btn-danger px-3 py-2" value="Cancel">
 
             </div>
@@ -123,8 +123,8 @@
                         <tr>
                             <td colspan="2">
                                  <div class="text-center">
-                                    <button wire:click="edit({{ $pot->id }})" class="me-2 px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded rounded-3">Update</button>
-                                    <button wire:click="delete({{ $pot->id }})" onclick="return confirm('Are You Sure To Delete This Post?')" class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded rounded-3">Delete</button>
+                                    <button wire:click="edit({{ $pot->id }})" class="me-2 px-2 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded rounded-3" title="Edit"><i class="bi bi-pencil-square"></i></button>
+                                    <button wire:click="delete({{ $pot->id }})" onclick="return confirm('Are You Sure To Delete This Post?')" class="px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded rounded-3" title="Delete"><i class="bi bi-trash-fill"></i></button>
                                 </div>
                             </td>
                         </tr>
