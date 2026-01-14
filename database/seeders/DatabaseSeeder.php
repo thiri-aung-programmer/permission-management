@@ -25,7 +25,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
         // PermissionSeeder::class,
         // AdminUserSeeder::class,
-        FlowerPotsSeeder::class,
+        // FlowerPotsSeeder::class,
+        ColorSeeder::class,
+        MaterialSeeder::class,
+        SizeSeeder::class,
         ]);
     }
 }
