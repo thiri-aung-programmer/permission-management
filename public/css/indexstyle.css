@@ -1,0 +1,191 @@
+/* media scree ကူးရန် */
+ /* Extra small devices (portrait phones, less than 576px) */
+ @media (max-width: 575.98px) { 
+
+ }
+
+ /* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) { 
+
+ }
+
+ /* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) { 
+
+ }
+
+ /* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+
+ }
+
+ /* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+ }
+
+ /* media screen ကူးရန်အဆုံး */
+ 
+body{
+    background-image: url(images/sectioncover.jpg);
+    background-size: cover;
+}
+
+ .col-md-3 .aboutcard
+{
+    background-image: linear-gradient(to top left,bisque 50%,hsl(48, 94%, 54%) 50%);
+    width:70%;
+    margin-left:15%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.col-md-3 .aboutcard img{
+    width:100%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.aboutrow{
+    background-color: rgb(245, 155, 45);
+    padding:20px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    border:3px solid rgb(5, 0, 0);
+    position:relative;
+    z-index: 100;
+}
+.aboutrow .bg{
+    position:absolute;
+    width:100%;
+    height: 100%;
+    top:-7%;
+    border-radius: 20px;
+    border:3px solid rgb(253, 253, 253);
+    /*border:7px solid hsla(0, 0%, 50%,0.4);
+    */background-color: hsla(0, 0%, 100%,0.4);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    z-index: -50;
+}
+.aboutrow .col-md-9{
+    z-index: 100;
+}
+.aboutrow .col-md-9 h4{
+    font-family: 'Berlin Sans FB';
+    color:green;
+    text-shadow: 1px 1px 1px rgb(255, 255, 255);
+}
+.aboutrow .col-md-9 p{
+    font-family: 'MV Boli';
+    /*font-weight: bold;
+    */line-height: 150%;
+    color:rgb(2, 2, 66);
+    text-align: justify;
+    hyphens:auto;
+    -webkit-hyphens:auto;
+    -moz-hyphens:auto;
+    -ms-hyphens:auto;
+    -webkit-hyphens:auto;
+}
+.container .servicerow{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.servicerow .cardservice{
+    background-color: transparent;
+    border:none;
+    position:relative;
+    opacity:0.7;
+    transition:0.3s;
+    -webkit-transition:0.3s;
+    -moz-transition:0.3s;
+    -ms-transition:0.3s;
+    -o-transition:0.3s;
+}
+.servicerow .cardservice:hover{
+    opacity: 1;
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+}
+.servicerow .cardservice p{
+    text-align: center;    
+    font-weight: bold;
+    position: absolute;
+    bottom:0%;   
+    display: inline-block;
+    padding:10px 20px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.7);
+    -webkit-border-radius: 50% ;
+    -moz-border-radius: 50% ;
+    -ms-border-radius: 50% ;
+    -o-border-radius: 50% ;
+    transition:0.2s;
+    -webkit-transition:0.2s;
+    -moz-transition:0.2s;
+    -ms-transition:0.2s;
+    -o-transition:0.2s;
+    visibility: hidden;
+}
+.servicerow .cardservice:hover p{
+    visibility: visible;
+}
+
+/* service အတွက် media screen အစ */
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+    .servicerow .cardservice p{
+        left:23.5%;
+        font-size: 0.85rem;
+    }
+    .aboutrow .col-md-9 p{
+        font-size: 0.8rem;
+    }
+                
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    .servicerow .cardservice p{
+        left:23.5%;
+        font-size: 1rem;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .servicerow .cardservice p{
+        left:25%;
+        font-size: 1rem;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+    .servicerow .cardservice p{
+        left:25%;
+        font-size: 1.2rem;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .servicerow .cardservice p{
+        left:25%;
+    }
+}
+/* service အတွက် media screen အစ */

@@ -7,11 +7,19 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\Login;
 use App\Http\Controllers\Auth\Logout;
+use App\Livewire\Counter;
+use App\Livewire\FlowerPotCrud;
 use Illuminate\Support\Facades\Route;
 
 
 // Login routes
 Route::middleware('guest')->group(function () {
+    // Route::view('/test','loginpage');
+    Route::get('/stock', function () {
+        return view('stock');
+    });
+    Route::get('/test', Counter::class);
+    Route::get("/", [HomeController::class, 'index'])->middleware('guest')->name('home');
 
     // Route::get("/", )->name('home');
     Route::get('/login', [HomeController::class, 'index'])->name('login');
@@ -25,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get("/", [HomeController::class, "dashboard"])->name("dashboard");
 
     Route::post('/logout', Logout::class)->name('logout');
+    Route::get("/pots", FlowerPotCrud::class)->name('flowerpot');
 
     Route::prefix('role')->controller(RoleController::class)->group(
         function () {

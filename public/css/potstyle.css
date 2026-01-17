@@ -1,0 +1,140 @@
+/* media scree ကူးရန် */
+ /* Extra small devices (portrait phones, less than 576px) */
+ @media (max-width: 575.98px) { 
+
+ }
+
+ /* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) { 
+
+ }
+
+ /* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) { 
+
+ }
+
+ /* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) { 
+
+ }
+
+ /* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+ }
+
+ /* media screen ကူးရန်အဆုံး */
+ 
+body{
+    background-image: url(../images/sectioncover.jpg);
+    background-size: cover;
+}
+ .potrow .col-md-3{
+    margin-top:10px;
+    margin-bottom: 10px;
+ }
+ .col-md-3 .potcard{
+    border:3px solid rgb(255, 255, 255);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    /*margin:20px auto;
+    */transition: 1s;
+    -webkit-transition:1s;
+    -moz-transition:1s;
+    -ms-transition:1s;
+    -o-transition:1s;
+    position: relative;
+}
+.potcard .bg{
+    position:absolute;
+    width:100%;
+    height: 100%;
+    border:2px solid darkgoldenrod;
+    top:0;
+    background-color:rgb(101, 253, 13);
+    transition:1.5s;
+    -webkit-transition:1.5s;
+    -moz-transition:1.5s;
+    -ms-transition:1.5s;
+    -o-transition:1.5s;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+   opacity: 0;
+}
+.potcard .bg table{
+   border:0;
+   
+   /* text-align: center; */
+   /* background-color: transparent; */
+   /* min-width:100%;
+   margin:auto; */
+   margin:0.7rem 0.3rem;
+   border-radius: 30px;
+   -webkit-border-radius: 30px;
+   -moz-border-radius: 30px;
+   -ms-border-radius: 30px;
+   -o-border-radius: 30px;
+   box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+.potcard .bg table td,th{
+    font-size: 0.85rem;
+    padding:0.5rem 0.7rem;
+    border:0;
+    
+}
+.potcard .bg table tr{
+    background-color: bisque;   
+    border:0;
+    /* width:100%; */
+}
+
+.potcard .bg table tr:nth-child(1){
+    background-color: rgb(247, 186, 112);
+    color: darkblue;
+}
+.potcard .bg table td:nth-child(odd){
+    /* background: red; */
+    text-align: left;
+    width:45%;
+}
+.potcard .bg table th:nth-child(odd){
+    
+    text-align: left;
+    width:60%;
+}
+.potcard .bg  table td:nth-child(even),th:nth-child(even){
+    text-align: center;
+    width:40%;
+}
+.potcard:hover .bg{
+    top:-50%;
+    opacity: 1;
+    animation: gotop 1s 1;
+    -webkit-animation: gotop 1s 1;
+}
+@keyframes gotop {
+    0%{
+        top:0;
+        opacity: 0;
+    }
+    50%{
+        /* top:-20%; */
+        opacity: 0.5;
+    }
+    100%{
+        top:-50%;
+        opacity:1;
+        /* z-index:  */
+    }
+    
+}
+.col-md-3 .potcard:hover{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+}

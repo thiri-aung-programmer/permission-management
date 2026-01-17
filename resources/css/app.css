@@ -1,4 +1,8 @@
+
+@import "./potstyle.css";
+@import "./style.css";
 @import 'tailwindcss';
+
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -12,7 +16,7 @@
 }
 
 
-@layer utilities {
+/* @layer utilities { */
   @keyframes circleReveal {
     0% {
         clip-path: circle(0% at 50% 50%);                         
@@ -82,5 +86,7 @@
   .animate-turnaround{
     animation:turnaround 7s ease-in-out infinite;
   }
-}
+  /* indoor plants page အတွက် css အစ */
 
+  /* style.css ထဲကဟာတွေ */
+ 

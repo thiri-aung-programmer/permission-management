@@ -16,6 +16,7 @@ class AdminUserSeeder extends Seeder
 
     public function run(): void
     {
+
         // note: role should have permissoin 
         $role = Role::firstOrCreate(
             [
@@ -25,10 +26,6 @@ class AdminUserSeeder extends Seeder
                 "name" => "admin",
             ]
         );
-
-        $permission_ids = Permission::pluck('id')->toArray();
-        $role->permissions()->attach($permission_ids);
-
         // NOTE တစ်ယောက်အတွက်ပဲ first သုံးမယ်ဆို one-dim array ဖြစ်ရပါမယ်
         $adminuser = [
             'name' => 'Mg Mg',
@@ -36,13 +33,16 @@ class AdminUserSeeder extends Seeder
             'phone' => '091234567',
             'email' => 'mgmg@gmail.com',
             'address' => 'Mandalay',
-            'password' => bcrypt('mgmg123'), // NOTE: CAST ထားပီးရင် BCRYPT လုပ်စရာမလိုပါ လုပ်လည်းရပါတယ် 
+            'password' => 'mgmg123',
             'is_active' => '1',
             'gender' => '1',
             'role_id' => $role->id // NOTE ဒါမျိုးသုံးပါ
 
+
         ];
 
+        $permission_ids = Permission::pluck('id')->toArray();
+        $role->permissions()->attach($permission_ids);
 
         AdminUser::firstOrCreate(
             [
