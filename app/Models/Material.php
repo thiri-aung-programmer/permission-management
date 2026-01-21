@@ -16,5 +16,7 @@ class Material extends Model
         
     ];
    
-
+    public function flowerpots(){
+        return $this->belongsToMany(FlowerPot::class,"flower_pots");
+    }
 }

@@ -18,4 +18,22 @@ class FlowerPot extends Model
         'price',
         'stock',
     ];
+     public function color()
+    {
+        return $this->belongsTo(Color::class, 'color', 'id');
+        //   ->with("role:name");
+    }
+    public function material()
+    {
+        return $this->belongsTo(Material::class, 'material', 'id');
+        //   ->with("role:name");
+    }
+    public function size()
+    {
+        return $this->belongsTo(Size::class, 'size', 'id');
+        //   ->with("role:name");
+    }
+    
+    
+
 }

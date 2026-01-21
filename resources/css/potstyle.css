@@ -59,6 +59,11 @@ body{
     background-color: bisque;   
     border:0;
 }
+.potcard .image{
+    min-width: auto;
+    min-height: 50px;
+    /* background-color: antiquewhite; */
+}
 
 .potcard .bg table tr:nth-child(1){
     background-color: rgb(247, 186, 112);

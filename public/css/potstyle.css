@@ -90,7 +90,11 @@ body{
     border:0;
     /* width:100%; */
 }
-
+.potcard img{
+    min-width: auto;
+    min-height: 260px;
+    /* background-color: antiquewhite; */
+}
 .potcard .bg table tr:nth-child(1){
     background-color: rgb(247, 186, 112);
     color: darkblue;

@@ -34,7 +34,7 @@
             <button id="openBtn" class="z-0 py-3 rounded-full font-bold bg-blue-900 text-gray-50  border-4 border-spacing-10 shadow-2xl shadow-blue-600 hover:border-black hover:bg-gray-300 hover:text-gray-950 transition-all duration-300 px-[50px]">
                 Login
             </button>
-            <div class="w-1/3 bg-gray-50 p-6 rounded-lg shadow-lg absolute hidden z-50" id="mymodal">
+            <div class="w-[75%] md:w-1/3  bg-gray-50 p-6 rounded-lg shadow-lg absolute hidden z-50" id="mymodal">
                 <div class="flex justify-end cursor-pointer" id="closebtn">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 text-gray-500 bg-gray-50  fw-bold  w-10 h-10 p-2 rounded-full shadow-xl">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />

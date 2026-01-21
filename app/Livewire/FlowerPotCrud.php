@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use App\Models\FlowerPot;
 use Livewire\Component;
-
+use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 
 class FlowerPotCrud extends Component
@@ -18,24 +18,36 @@ class FlowerPotCrud extends Component
         $this->pots = FlowerPot::latest()->get();
         return view('livewire.flower-pot-crud');
     }
-    public function store()
-    {
-        //  dd($this->images);
-        $this->validate([
-             'name' => 'required',
-            'code' => 'required',
-            'images' => 'required|image|max:2048',
+    public function rules(){
+         if ($this->images && !is_string($this->images)) {
+         $rules['images'] = 'image|max:2048';
+         }
+         else{
+             $rules['images'] = 'nullable';
+         }
+        $rules = [
+            'name' => 'required',
+            'code' => 'required',           
             'size' => 'required',
             'color' => 'required',
+            // 'images'=>'nullable',
             'material' => 'required',
             'price' => 'required',
             'stock' => 'required',
-        ]);
-        //  $imagePath = $this->images->store('flower-pots', 'public');
+        ];
+      
+        return $rules;
+    }
+    public function store()
+    {
+        //  dd($this->images);
+        $this->validate();    
+          $imagePath = $this->images->store('photos', 'public');
         FlowerPot::create([
             'name' => $this->name,
             'code' => $this->code,
-            'images'=> $this->images->getClientOriginalName(),
+            // 'images'=> $this->images->getClientOriginalName(),
+            'images'=> $imagePath, //server မှာ save ထားတဲ့ path ထည့်လိုက်တယ်။ 
             'size' => $this->size,
             'color' => $this->color,
             'material' => $this->material,
@@ -71,28 +83,29 @@ class FlowerPotCrud extends Component
         $this->potId=$pot->id;
     }
     public function update(){
-        $this->validate([
-             'name' => 'required',
-            'code' => 'required',
-            'images' => 'required|image|max:2048',
-            'size' => 'required',
-            'color' => 'required',
-            'material' => 'required',
-            'price' => 'required',
-            'stock' => 'required',
-        ]);
+         $this->validate(); 
         if($this->potId){
             $pot=FlowerPot::findOrFail($this->potId);
-            $pot->update([
-             'name' => $this->name,
+            $prepareFlowerpotData=[
+            'name' => $this->name,
             'code' => $this->code,
-            'images'=> $this->images->getClientOriginalName(),
+            // 'images'=> $this->images->getClientOriginalName(),
             'size' => $this->size,
             'color' => $this->color,
             'material' => $this->material,
             'price' => $this->price,
             'stock' =>   $this->stock,
-            ]);
+            ];
+            if($this->images && !is_string($this->images))
+            {
+                // ၂။ ပုံဟောင်း ရှိမရှိ စစ်မယ်၊ ရှိရင် Storage ထဲက ဖျက်မယ်
+                if ($pot->images) {
+                Storage::disk('public')->delete($pot->images);
+            }
+                $imagePath = $this->images->store('photos', 'public');
+                $prepareFlowerpotData['images'] =$imagePath;
+            }
+            $pot->update( $prepareFlowerpotData );
             \session()->flash('message', 'Pot Updated Successfully');
             $this->resetInput();
         }
