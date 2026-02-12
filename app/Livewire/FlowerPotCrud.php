@@ -6,16 +6,23 @@ use App\Models\FlowerPot;
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
+use App\Models\Size;
+use App\Models\Material;
+use App\Models\Color;
 
 class FlowerPotCrud extends Component
 {
     use WithFileUploads;
-    public $pots, $potId, $name, $code, $images, $size, $color, $material, $price, $stock;
+    public $pots, $potId, $name, $code, $images, $size_id, $color_id, $material_id, $price, $stock;
+    public $sizes,$colors,$materials;
     public $isEdit = false;
 
     public function render()
     {
         $this->pots = FlowerPot::latest()->get();
+        $this->sizes=Size::latest()->get();
+        $this->colors=Color::latest()->get();
+        $this->materials=Material::latest()->get();
         return view('livewire.flower-pot-crud');
     }
     public function rules(){
@@ -28,10 +35,10 @@ class FlowerPotCrud extends Component
         $rules = [
             'name' => 'required',
             'code' => 'required',           
-            'size' => 'required',
-            'color' => 'required',
+            'size_id' => 'required',
+            'color_id' => 'required',
             // 'images'=>'nullable',
-            'material' => 'required',
+            'material_id' => 'required',
             'price' => 'required',
             'stock' => 'required',
         ];
@@ -48,9 +55,9 @@ class FlowerPotCrud extends Component
             'code' => $this->code,
             // 'images'=> $this->images->getClientOriginalName(),
             'images'=> $imagePath, //server မှာ save ထားတဲ့ path ထည့်လိုက်တယ်။ 
-            'size' => $this->size,
-            'color' => $this->color,
-            'material' => $this->material,
+            'size_id' => $this->size_id,
+            'color_id' => $this->color_id,
+            'material_id' => $this->material_id,
             'price' => $this->price,
             'stock' =>   $this->stock,
         ]);
@@ -61,9 +68,9 @@ class FlowerPotCrud extends Component
         $this->name="";
         $this->code= "";
         $this->images=null;
-        $this->size= "";
-        $this->color= "";
-        $this->material= "";
+        $this->size_id= "";
+        $this->color_id= "";
+        $this->material_id= "";
         $this->price= "";
         $this->stock= "";
         $this->isEdit=false;
@@ -74,9 +81,9 @@ class FlowerPotCrud extends Component
          $this->name=$pot->name;
         $this->code= $pot->code;
         $this->images=$pot->images;
-        $this->size= $pot->size;
-        $this->color= $pot->color;
-        $this->material= $pot->material;
+        $this->size_id= $pot->size_id;
+        $this->color_id= $pot->color_id;
+        $this->material_id= $pot->material_id;
         $this->price=$pot->price;
         $this->stock= $pot->stock;
         $this->isEdit=true;
@@ -90,9 +97,9 @@ class FlowerPotCrud extends Component
             'name' => $this->name,
             'code' => $this->code,
             // 'images'=> $this->images->getClientOriginalName(),
-            'size' => $this->size,
-            'color' => $this->color,
-            'material' => $this->material,
+            'size_id' => $this->size_id,
+            'color_id' => $this->color_id,
+            'material_id' => $this->material_id,
             'price' => $this->price,
             'stock' =>   $this->stock,
             ];

@@ -41,7 +41,18 @@
                     <label for="">Color</label>
                 </div>
                 <div class="col-md-7 col-10">
-                    <input type="text" wire:model="color" class="form-control">
+                    {{-- <input type="text" wire:model="color" class="form-control"> --}}
+                    <select id="color_id" wire:model="color_id" class="form-control">
+                             <option value="">-- Select Color --</option>
+                         @forelse ($colors as $color)
+                             <option value="{{ $color->id }}">{{$color->name}}</option>
+                         @empty
+                            <option value="">-- No Record --</option>
+                        @endforelse
+                        {{-- <option value="Medium">Medium</option>
+                        <option value="Large">Large</option>
+                        <option value="Extra Large">Extra Large</option> --}}
+                    </select>
                 </div>
             </div>
 
@@ -50,7 +61,18 @@
                     <label for="">Size</label>
                 </div>
                 <div class="col-md-7 col-10">
-                    <input type="text" wire:model="size" class="form-control">
+                    {{-- <input type="text" wire:model="size" class="form-control"> --}}
+                    <select id="size_id" wire:model="size_id" class="form-control">
+                            <option value="">-- Select Size --</option>
+                         @forelse ($sizes as $size)
+                            <option value="{{ $size->id }}">{{$size->name}}</option>
+                         @empty
+                            <option value="">-- No Record --</option>
+                        @endforelse
+                        {{-- <option value="Medium">Medium</option>
+                        <option value="Large">Large</option>
+                        <option value="Extra Large">Extra Large</option> --}}
+                    </select>
                 </div>
             </div>
 
@@ -59,7 +81,18 @@
                     <label for="">Materials</label>
                 </div>
                 <div class="col-md-7 col-10">
-                    <input type="text" wire:model="material" class="form-control">
+                    {{-- <input type="text" wire:model="material" class="form-control"> --}}
+                     <select id="material_id" wire:model="material_id" class="form-control">
+                            <option value="">-- Select Material --</option>
+                         @forelse ($materials as $material)
+                            <option value="{{ $material->id }}">{{$material->name}}</option>
+                        @empty
+                            <option value="">-- No Record --</option>
+                        @endforelse
+                        {{-- <option value="Medium">Medium</option>
+                        <option value="Large">Large</option>
+                        <option value="Extra Large">Extra Large</option> --}}
+                    </select>
                 </div>
             </div>
 
@@ -105,15 +138,15 @@
                             </tr>
                             <tr>
                                 <td>Size : </td>
-                                <td>{{ $pot->size }}</td>
+                                <td>{{ $pot->size->name }}</td>
                             </tr>
                             <tr>
                                 <td>Color : </td>
-                                <td>{{ $pot->color }}</td>
+                                <td>{{ $pot->color->name }}</td>
                             </tr>
                             <tr>
                                 <td>Material : </td>
-                                <td>{{ $pot->material }}</td>
+                                <td>{{ $pot->material->name }}</td>
                             </tr>
                             <tr>
                                 <td>Price : </td>

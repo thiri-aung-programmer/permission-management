@@ -12,25 +12,25 @@ class FlowerPot extends Model
         'name',        
         'images',	 	 	 	 	 	 	 	
         'code',
-        'color',
-        'size',
-        'material',
+        'color_id',
+        'size_id',
+        'material_id',
         'price',
         'stock',
     ];
      public function color()
     {
-        return $this->belongsTo(Color::class, 'color', 'id');
+        return $this->belongsTo(Color::class, 'color_id', 'id');
         //   ->with("role:name");
     }
     public function material()
     {
-        return $this->belongsTo(Material::class, 'material', 'id');
+        return $this->belongsTo(Material::class, 'material_id', 'id');
         //   ->with("role:name");
     }
     public function size()
     {
-        return $this->belongsTo(Size::class, 'size', 'id');
+        return $this->belongsTo(Size::class, 'size_id', 'id');
         //   ->with("role:name");
     }
     
