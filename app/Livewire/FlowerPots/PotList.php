@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\FlowerPots;
+
 
 use App\Models\FlowerPot;
 use Livewire\Component;
@@ -10,26 +11,27 @@ use App\Models\Size;
 use App\Models\Material;
 use App\Models\Color;
 
-class FlowerPotCrud extends Component
+
+class PotList extends Component
 {
-   
-    public $isEdit = false;
-    protected $listeners = [
-        'isEdit' => 'handleEdit',
-    ];
-    public function handleEdit($id){
-        $this->isEdit = true;
-    }
     public function render()
     {
-       
-        return view('livewire.flower-pot-crud',
+        return view('livewire.flower-pots.pot-list',
         [
             'pots'=>FlowerPot::all(),
             'colors'=>Color::all(),
             'sizes'=> Size::all(),
             'materials'=>Material::all(),
-        ]);
+        ]
+        );
     }
-    
+
+     public function delete($id){
+        FlowerPot::findOrFail($id)->delete();
+          \session()->flash('message', 'Pot Deleted Successfully');
+
+    }
+    public function edit($id){
+        $this->dispatch('isEdit',$id);
+    }
 }
